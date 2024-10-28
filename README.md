@@ -22,3 +22,7 @@ Es bedarf zunächst einer vielseitigen Formatunterstützung jeglicher Bild-, Vid
 - Sicherheit (Datenschutz)
 - Verfügbarkeit (über denselben Link)
 - gleichzeitige Benutzung
+  
+# Concept Map
+![Mind Map](https://github.com/user-attachments/assets/47538c59-5368-4282-bfef-dd220ebcedb2)
+
