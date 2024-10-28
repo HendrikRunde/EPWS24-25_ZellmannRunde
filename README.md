@@ -17,4 +17,8 @@ Es bedarf zunächst einer vielseitigen Formatunterstützung jeglicher Bild-, Vid
 - Programmiersprachen: Verwendung von JavaScript bei der Implentierung der Anwendung mit Vue.js und Nuxt.js
 - Frameworks: Nutzung von Web-Frameworks wie Bootstrap für die schnelle Entwicklung der Benutzeroberfläche.
 
-# Mögliche Herausforderungen folgen
+# Mögliche Herausforderungen
+- Handling großer Dateien
+- Sicherheit (Datenschutz)
+- Verfügbarkeit (über denselben Link)
+- gleichzeitige Benutzung
