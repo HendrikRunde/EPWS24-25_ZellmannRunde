@@ -1,8 +1,8 @@
 # EPWS24-25_ZellmannRunde
 Entwicklungprojekt mit Schwerpunkt Web Development
 
-# Einleitende Worte
-Im Rahmen des Entwicklungsprojekts mit dem Schwerpunkt Web Development wird verlangt eine Webapplikation zu entwickeln, die es ermöglicht zu große Mediendateien zu verkleinern bzw. zu komprimieren bevor diese in einem CMS hochgeladen werden.
+# Projektkontext
+Im Rahmen des Entwicklungsprojekts mit dem Schwerpunkt Web Development entwickeln wir eine Webapplikation, die es ermöglicht zu große Mediendateien zu verkleinern bzw. zu komprimieren bevor diese in einem CMS hochgeladen werden.
 
 # Hintergrund
 Content-Management-Systeme (CMS) sind wichtige Werkzeuge zur Verwaltung und Veröffentlichung digitaler Inhalte wie Bilder, Videos und Audio. Sie ermöglichen es Benutzern, Inhalte ohne technische Vorkenntnisse zu erstellen und zu pflegen. Bekannte Beispiele für CMS sind WordPress, Joomla! und Drupal. Obwohl CMS-Lösungen die Inhaltsverwaltung vereinfachen, führen große, unoptimierte Dateien häufig zu Performance-Problemen und belasten die Serverkapazitäten. Dies gilt insbesondere für Medieninhalte wie hochauflösende Bilder oder große Videodateien, die auf Websites und Plattformen veröffentlicht werden.
@@ -13,10 +13,12 @@ Durch die Verwendung von mobilen, hochauflösenden Endgeräten bzw. Kameras komm
 # Lösungsansatz
 Es bedarf zunächst einer vielseitigen Formatunterstützung jeglicher Bild-, Video- und Audioformate. Darüber hinaus wird eine benutzerfreundliche Oberfläche erwartet, die einen einfachen Upload-Prozess für Kunden ohne zusätzliche Konfiguration möglich macht. Die Implementierung eines Administrationsbereichs bietet die Möglichkeit flexible Konfigurationsmöglichkeiten und die Verwaltung von Kundenkonten. Zudem ist es von Vorteil mehrere Kunden gleichzeitig bedienen und somit größere Datenmengen zur selben Zeit verarbeiten zu können (Skalierbarkeit). Zuletzt ist auch die Sicherheit von großer Bedeutung. Die Speicherung bzw. Übertragung von Daten verlangt eine gewisse Sicherheit, genauso wie der Schutz vor unbefugtem Zugriff essentiell ist.
 
+# Zielsetzung
+Ziel des Projekts ist es, eine leistungsfähige Webanwendung zu entwickeln, die Nutzer ohne technische Vorkenntnisse dabei unterstützt, Mediendateien in geeigneter Größe und Qualität für den Einsatz in Content-Management-Systemen (CMS) bereitzustellen. Die Anwendung soll sicherstellen, dass Medieninhalte schnell und einfach optimiert werden können, um so die Performance und Effizienz der verwendeten CMS-Plattformen zu steigern. Das Projekt legt besonderen Wert auf Benutzerfreundlichkeit, Anpassungsfähigkeit und Datensicherheit und richtet sich an eine Zielgruppe, die im Arbeitsalltag regelmäßig Medieninhalte verwaltet und hochlädt.
 # Zielgruppe
-Administratoren
+Verwalter/ Account-Manager
 
-Admins sind Personen oder Unternehmen, die für die Verwaltung eines CMS und die Inhalte auf einer Website verantwortlich sind. Sie legen die Optimierungsvorgaben für die Dateiarten und -größen fest und verwalten den Kunden-Upload über personalisierte Links. Ihre Hauptanforderung ist es, sicherzustellen, dass große Dateien optimiert werden, bevor sie auf die Website geladen werden, um die Serverlast und die Ladezeiten der Website zu minimieren.
+Verwalter/ Account-Manager sind Personen oder Unternehmen, die für die Verwaltung eines CMS und die Inhalte auf einer Website verantwortlich sind. Sie legen die Optimierungsvorgaben für die Dateiarten und -größen fest und verwalten den Kunden-Upload über personalisierte Links. Ihre Hauptanforderung ist es, sicherzustellen, dass große Dateien optimiert werden, bevor sie auf die Website geladen werden, um die Serverlast und die Ladezeiten der Website zu minimieren.
 
 Kunden
 
