@@ -5,7 +5,7 @@ Entwicklungprojekt mit Schwerpunkt Web Development
 Im Rahmen des Entwicklungsprojekts mit dem Schwerpunkt Web Development entwickeln wir eine Webapplikation, die es ermöglicht zu große Mediendateien zu verkleinern bzw. zu komprimieren bevor diese in einem CMS hochgeladen werden.
 
 # Hintergrund
-Content-Management-Systeme (CMS) sind wichtige Werkzeuge zur Verwaltung und Veröffentlichung digitaler Inhalte wie Bilder, Videos und Audio. Sie ermöglichen es Benutzern, Inhalte ohne technische Vorkenntnisse zu erstellen und zu pflegen. Bekannte Beispiele für CMS sind WordPress, Joomla! und Drupal. Obwohl CMS-Lösungen die Inhaltsverwaltung vereinfachen, führen große, unoptimierte Dateien häufig zu Performance-Problemen und belasten die Serverkapazitäten. Dies gilt insbesondere für Medieninhalte wie hochauflösende Bilder oder große Videodateien, die auf Websites und Plattformen veröffentlicht werden.
+Content-Management-Systeme (CMS) sind wichtige Werkzeuge zur Verwaltung und Veröffentlichung digitaler Inhalte wie Bilder, Videos und Audio. Sie ermöglichen es Benutzern, Inhalte ohne technische Vorkenntnisse zu erstellen und zu pflegen. Bekannte Beispiele für CMS sind WordPress, Joomla! und Drupal. Obwohl CMS-Lösungen die Inhaltsverwaltung vereinfachen, führen große, unoptimierte Dateien häufig zu Performance-Problemen und belasten die Systemkapazität. Dies gilt insbesondere für Medieninhalte wie hochauflösende Bilder oder große Videodateien, die auf Websites und Plattformen veröffentlicht werden.
 
 # Problemstellung
 Durch die Verwendung von mobilen, hochauflösenden Endgeräten bzw. Kameras kommt es oftmals dazu, dass Kunden mit übergroßen Mediendateien arbeiten und diese dann in ein CMS hochladen. Dies führt jedoch zu Speicher- und Performance-Problemen oder aber dieser Vorgang wird sogar direkt vom CMS blockiert. Daher bedarf es einer Anwendung, welche dem Kunden eine unkomplizierte und benutzerfreundliche Optimierung ermöglicht.
@@ -33,10 +33,34 @@ Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audio)
 - Frameworks: Nutzung von Web-Frameworks wie Bootstrap für die schnelle Entwicklung der Benutzeroberfläche.
 
 # Mögliche Herausforderungen
-- Handling großer Dateien
-- Sicherheit (Datenschutz)
-- Verfügbarkeit (über denselben Link)
-- gleichzeitige Benutzung
+
+-Handling großer Dateien:
+
+	  • Speicherbedarf und Ladezeiten: Große Mediendateien beanspruchen erhebliche Bandbreite und verlängern Ladezeiten, besonders bei langsamen Internetverbindungen oder mobilen Geräten.
+ 
+    • Speichereffizienz und Skalierbarkeit: Um das kontinuierlich wachsende Datenvolumen zu bewältigen, ist eine skalierbare Speicherlösung erforderlich, die auch mit steigender Dateigröße zurechtkommt.
+ 
+-Sicherheit (Datenschutz):
+
+    •	Datenintegrität und Datenschutz: Alle hochgeladenen Dateien und Benutzerdaten müssen sicher gespeichert und übertragen werden. Es ist wichtig, Datenschutzvorgaben zu erfüllen und entsprechende Sicherheitsprotokolle umzusetzen, um Compliance und Datensicherheit zu gewährleisten.
+  
+    •	Benutzerrollen und Berechtigungen
+  
+-Verfügbarkeit und Zuverlässigkeit der Anwendung:
+  
+    •	Systemverfügbarkeit bei hoher Benutzerlast: Hohe Benutzerzahlen oder plötzliche Traffic-Spitzen können das System überlasten.
+  
+    •	Datenverlust und Systemausfälle
+  
+    •	Einheitliche Links: Benutzer benötigen oft einen konsistenten Link für den Upload-Prozess. Die Implementierung eines Systems, das dauerhaft zugängliche Links unterstützt, ist erforderlich, um ein gleichbleibendes Benutzererlebnis zu bieten.
+  
+	  •	Skalierbare gleichzeitige Nutzung: Da mehrere Benutzer gleichzeitig auf die Anwendung zugreifen könnten, ist eine skalierbare Architektur erforderlich, die gleichzeitige Uploads und Downloads ohne Leistungseinbußen ermöglicht.
+ 
+-Bildqualität und Dateiformat-Management:
+
+  	•	Vielseitige Formatunterstützung: Um Kompatibilität sicherzustellen, muss die Anwendung verschiedene Bild-, Video- und Audioformate unterstützen.
+   
+    •	Qualitätserhaltung bei Komprimierung
   
 # Concept Map
 ![Mind Map](https://github.com/user-attachments/assets/47538c59-5368-4282-bfef-dd220ebcedb2)
