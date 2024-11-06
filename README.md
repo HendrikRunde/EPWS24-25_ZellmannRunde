@@ -84,7 +84,9 @@ Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audio)
    - Erwähnung der Features (unterstützte Dateiformate, Verschlüsselung, Ergebnisvorschau)
    - Möglichkeit, sich als Benutzer zu registrieren/annmelden
    - dennoch viel ungenutzter Raum
-  
+
+# Vergleich mit unserer Anwendung ShrinkIT
+
 Nach genauerer Betrachtung des Markts fällt auf, dass die bestehenden Webanwendungen nahezu allesamt veraltet bzw. in die Jahre gekommen sind. Keine dieser Anwendungen ist responsive (ungeeignet für mobile Endgeräte) Zudem bieten keinerlei Anwendungen die Option sowohl Bild-, als auch Video- und Audioformate zu verkleinern. Unsere Webanwendung fokussiert sich dabei vor allem auf die Berücksichtigung aller Dateiformate mit einer modernen und anschaulichen Umsetzung. Das Feauture der Benutzerregistrierung wird ebenfalls verwendet, um es Kunden zu ermöglichen auf deren verkleinerte Dateien über einen personalisierten Link dauerhaft zuzugreifen.
   
 # Concept Map
