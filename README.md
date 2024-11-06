@@ -16,14 +16,33 @@ Es bedarf zunächst einer vielseitigen Formatunterstützung jeglicher Bild-, Vid
 # Zielsetzung
 Ziel des Projekts ist es, eine leistungsfähige Webanwendung zu entwickeln, die Nutzer ohne technische Vorkenntnisse dabei unterstützt, Mediendateien in geeigneter Größe und Qualität für den Einsatz in Content-Management-Systemen (CMS) bereitzustellen. Die Anwendung soll sicherstellen, dass Medieninhalte schnell und einfach optimiert werden können, um so die Performance und Effizienz der verwendeten CMS-Plattformen zu steigern. Das Projekt legt besonderen Wert auf Benutzerfreundlichkeit, Anpassungsfähigkeit und Datensicherheit und richtet sich an eine Zielgruppe, die im Arbeitsalltag regelmäßig Medieninhalte verwaltet und hochlädt.
 # Zielgruppe
-Verwalter/ Account-Manager
+Admin/ Account-Manager
 
-Verwalter/ Account-Manager sind Personen oder Unternehmen, die für die Verwaltung eines CMS und die Inhalte auf einer Website verantwortlich sind. Sie legen die Optimierungsvorgaben für die Dateiarten und -größen fest und verwalten den Kunden-Upload über personalisierte Links. Ihre Hauptanforderung ist es, sicherzustellen, dass große Dateien optimiert werden, bevor sie auf die Website geladen werden, um die Serverlast und die Ladezeiten der Website zu minimieren.
+Admin/ Account-Manager sind Personen oder Unternehmen, die für die Verwaltung eines CMS und die Inhalte auf einer Website verantwortlich sind. Sie legen die Optimierungsvorgaben für die Dateiarten und -größen fest und verwalten den Kunden-Upload über personalisierte Links. Ihre Hauptanforderung ist es, sicherzustellen, dass große Dateien optimiert werden, bevor sie auf die Website geladen werden, um die Serverlast und die Ladezeiten der Website zu minimieren.
 
 Kunden
 
 Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audio) hochladen müssen. Sie haben oft wenig technisches Wissen und benötigen eine Lösung, die ihnen erlaubt, Dateien ohne manuelle Optimierungsschritte hochzuladen. Für sie ist es wichtig, dass der Prozess einfach, schnell und ohne zusätzliche Anpassungen funktioniert. Die Anwendung gibt ihnen die Möglichkeit, optimierte Dateien zu erhalten, die direkt ins CMS hochgeladen werden können.
 
+# User Flow Admin/Account-Manager und Kunde
+
+Admin/Account-Manager
+1. Anmeldung im Adminbereich 
+2. Definition der Vorgaben für Dateigröße/Auflösung
+3. Auswahl des Kunden
+4. Definition bzw. Prüfen des Guthabens für jeden einzelnen Kunden
+5. Definition bzw. Prüfen des Gültigkeitszeitraumes personalisierter Links
+6. Generierung des personalisierten Zugriffslinks
+7. Änderungen speichern
+
+Kunde
+1. Anmeldung in der Anwendung
+2. Dashboard-Übersicht
+3a. erhält Information, ob noch genügend Guthaben vorhanden ist
+3b. Exception: weitere Verkleinerung nicht möglich
+4a. Hochladen der gewünschten Mediendatei
+4b. Möglichkeit Vorgang abzubrechen
+5. Visuelle Bestätigung und Erhalten des fertigen Ergebnisses als Download
 
 # Tech Stack
 - Frontend: Intuitive Benutzeroberfläche für den Upload und Download von Dateien. Realisierung mit Vue.js
@@ -65,20 +84,20 @@ Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audio)
 
 # Marktanalyse
 
-# 1. Compress JPEG/PNG/GIF/PDF compressing.com
+1. Compress JPEG/PNG/GIF/PDF compressing.com
    - bis zu 20 Bilddateien können zur selben Zeit komprimiert werden
    - ausschließlich auf Bilddateien beschränkt
    - kaum Struktur
    - unübersichtlich
    - Fokus auf Schlichtheit, User Experience (UX) leidet dennoch darunter
    
-# 2. Online-umwandeln.de
+2. Online-umwandeln.de
    - Videodateien in nur 3 Schritten umwandeln
    - ausschließlich auf Videodateien beschränkt
    - sichtlich veraltetes Layout/Design
    - mangelhafte User Experience
 
-# 3. Clideo
+3. Clideo
    - Videokomprimierung
    - wesentlich anschaulicher als bisherige Beispiele
    - Erwähnung der Features (unterstützte Dateiformate, Verschlüsselung, Ergebnisvorschau)
