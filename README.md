@@ -65,20 +65,20 @@ Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audio)
 
 # Marktanalyse
 
-1. Compress JPEG/PNG/GIF/PDF compressing.com
+# 1. Compress JPEG/PNG/GIF/PDF compressing.com
    - bis zu 20 Bilddateien können zur selben Zeit komprimiert werden
    - ausschließlich auf Bilddateien beschränkt
    - kaum Struktur
    - unübersichtlich
    - Fokus auf Schlichtheit, User Experience (UX) leidet dennoch darunter
    
-2. Online-umwandeln.de
+# 2. Online-umwandeln.de
    - Videodateien in nur 3 Schritten umwandeln
    - ausschließlich auf Videodateien beschränkt
    - sichtlich veraltetes Layout/Design
    - mangelhafte User Experience
 
-3. Clideo
+# 3. Clideo
    - Videokomprimierung
    - wesentlich anschaulicher als bisherige Beispiele
    - Erwähnung der Features (unterstützte Dateiformate, Verschlüsselung, Ergebnisvorschau)
