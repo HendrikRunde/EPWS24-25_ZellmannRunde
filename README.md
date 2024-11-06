@@ -38,10 +38,15 @@ Admin/Account-Manager
 Kunde
 1. Anmeldung in der Anwendung
 2. Dashboard-Übersicht
+
 3a. erhält Information, ob noch genügend Guthaben vorhanden ist
+
 3b. Exception: weitere Verkleinerung nicht möglich
+
 4a. Hochladen der gewünschten Mediendatei
+
 4b. Möglichkeit Vorgang abzubrechen
+
 5. Visuelle Bestätigung und Erhalten des fertigen Ergebnisses als Download
 
 # Tech Stack
