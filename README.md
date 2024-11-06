@@ -1,4 +1,4 @@
-# EPWS24-25_ZellmannRunde
+# EPWS24-25_ZellmannRunde ShrinkIT
 Entwicklungprojekt mit Schwerpunkt Web Development
 
 # Projektkontext
@@ -61,6 +61,31 @@ Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audio)
   	•	Vielseitige Formatunterstützung: Um Kompatibilität sicherzustellen, muss die Anwendung verschiedene Bild-, Video- und Audioformate unterstützen.
    
     •	Qualitätserhaltung bei Komprimierung
+
+
+# Marktanalyse
+
+1. Compress JPEG/PNG/GIF/PDF compressing.com
+   - bis zu 20 Bilddateien können zur selben Zeit komprimiert werden
+   - ausschließlich auf Bilddateien beschränkt
+   - kaum Struktur
+   - unübersichtlich
+   - Fokus auf Schlichtheit, User Experience (UX) leidet dennoch darunter
+   
+2. Online-umwandeln.de
+   - Videodateien in nur 3 Schritten umwandeln
+   - ausschließlich auf Videodateien beschränkt
+   - sichtlich veraltetes Layout/Design
+   - mangelhafte User Experience
+
+3. Clideo
+   - Videokomprimierung
+   - wesentlich anschaulicher als bisherige Beispiele
+   - Erwähnung der Features (unterstützte Dateiformate, Verschlüsselung, Ergebnisvorschau)
+   - Möglichkeit, sich als Benutzer zu registrieren/annmelden
+   - dennoch viel ungenutzter Raum
+  
+Nach genauerer Betrachtung des Markts fällt auf, dass die bestehenden Webanwendungen nahezu allesamt veraltet bzw. in die Jahre gekommen sind. Keine dieser Anwendungen ist responsive (ungeeignet für mobile Endgeräte) Zudem bieten keinerlei Anwendungen die Option sowohl Bild-, als auch Video- und Audioformate zu verkleinern. Unsere Webanwendung fokussiert sich dabei vor allem auf die Berücksichtigung aller Dateiformate mit einer modernen und anschaulichen Umsetzung. Das Feauture der Benutzerregistrierung wird ebenfalls verwendet, um es Kunden zu ermöglichen auf deren verkleinerte Dateien über einen personalisierten Link dauerhaft zuzugreifen.
   
 # Concept Map
 ![Mind Map](https://github.com/user-attachments/assets/47538c59-5368-4282-bfef-dd220ebcedb2)
