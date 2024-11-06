@@ -56,6 +56,13 @@ Kunde
 - Programmiersprachen: Verwendung von JavaScript bei der Implentierung der Anwendung mit Vue.js und Nuxt.js
 - Frameworks: Nutzung von Web-Frameworks wie Bootstrap für die schnelle Entwicklung der Benutzeroberfläche.
 
+# Erste POC´s
+
+1. Prüfen, ob ausgewählte Frameworks Dateiverkleinerung korrekt ausführen
+2. Prüfen, ob die Frameworks die Option einer Qualitätsanpassung bei der Verkleinerung anbieten
+
+Beide Prüfungen sollen für alle Medientypen durchgeführt werden (JPEG, PNG, MP3, MP4) 
+
 # Mögliche Herausforderungen
 
 -Handling großer Dateien:
