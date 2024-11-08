@@ -56,16 +56,6 @@ Kunde
 - Programmiersprachen: Verwendung von JavaScript bei der Implentierung der Anwendung mit Vue.js und Nuxt.js
 - Frameworks: Nutzung von Web-Frameworks wie Bootstrap für die schnelle Entwicklung der Benutzeroberfläche.
 
-# Erste POC´s
-
-1. Prüfen, ob ausgewählte Frameworks Dateiverkleinerung korrekt ausführen
-2. Prüfen, ob die Frameworks die Option einer Qualitätsanpassung bei der Verkleinerung anbieten
-3. Prüfen, ob das System eine sichere Authentifizierung und Autorisierung für die verschiedenen Benutzerrollen bietet
-4. Prüfen, ob das System mehrere gleichzeitige Datei-Uploads stabil und performant verarbeitet
-5. Prüfen, ob verschiedene Komprimierungsalgorithmen eine akzeptable Qualitätsstufe bei unterschiedlichen Dateiformaten (z. B. JPEG, PNG, MP4) gewährleisten
-6. Prüfen, ob Nutzer während des Upload- und Verarbeitungsprozesses durch Fortschrittsanzeigen und Rückmeldungen ausreichend informiert werden
-
-Beide Prüfungen sollen für alle Medientypen durchgeführt werden (JPEG, PNG, MP3, MP4) 
 
 # Mögliche Herausforderungen
 
@@ -98,6 +88,17 @@ Beide Prüfungen sollen für alle Medientypen durchgeführt werden (JPEG, PNG, M
     •	Qualitätserhaltung bei Komprimierung
 
 
+
+# Erste POC´s
+
+1. Prüfen, ob ausgewählte Frameworks Dateiverkleinerung korrekt ausführen
+2. Prüfen, ob die Frameworks die Option einer Qualitätsanpassung bei der Verkleinerung anbieten
+3. Prüfen, ob das System eine sichere Authentifizierung und Autorisierung für die verschiedenen Benutzerrollen bietet
+4. Prüfen, ob das System mehrere gleichzeitige Datei-Uploads stabil und performant verarbeitet
+5. Prüfen, ob verschiedene Komprimierungsalgorithmen eine akzeptable Qualitätsstufe bei unterschiedlichen Dateiformaten (z. B. JPEG, PNG, MP4) gewährleisten
+6. Prüfen, ob Nutzer während des Upload- und Verarbeitungsprozesses durch Fortschrittsanzeigen und Rückmeldungen ausreichend informiert werden
+
+Alle Prüfungen sollen für alle Medientypen durchgeführt werden (JPEG, PNG, MP3, MP4) 
 # Marktanalyse
 
 1. Compress JPEG/PNG/GIF/PDF compressing.com
