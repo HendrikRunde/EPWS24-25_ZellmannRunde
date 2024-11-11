@@ -24,9 +24,9 @@ Kunden
 
 Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audio) hochladen müssen. Sie haben oft wenig technisches Wissen und benötigen eine Lösung, die ihnen erlaubt, Dateien ohne manuelle Optimierungsschritte hochzuladen. Für sie ist es wichtig, dass der Prozess einfach, schnell und ohne zusätzliche Anpassungen funktioniert. Die Anwendung gibt ihnen die Möglichkeit, optimierte Dateien zu erhalten, die direkt ins CMS hochgeladen werden können.
 
-# User Flow Admin/Account-Manager und Kunde
+# User Flow Account-Manager und Kunde
 
-Admin/Account-Manager
+Account-Manager
 1. Anmeldung im Adminbereich 
 2. Definition der Vorgaben für Dateigröße/Auflösung
 3. Auswahl des Kunden
@@ -59,33 +59,23 @@ Kunde
 
 # Mögliche Herausforderungen
 
--Handling großer Dateien:
-
-	  • Speicherbedarf und Ladezeiten: Große Mediendateien beanspruchen erhebliche Bandbreite und verlängern Ladezeiten, besonders bei langsamen Internetverbindungen oder mobilen Geräten.
+Handling großer Dateien
+- Speicherbedarf und Ladezeiten: Große Mediendateien beanspruchen erhebliche Bandbreite und verlängern Ladezeiten, besonders bei langsamen Internetverbindungen oder mobilen Geräten.
+- Speichereffizienz und Skalierbarkeit: Um das kontinuierlich wachsende Datenvolumen zu bewältigen, ist eine skalierbare Speicherlösung erforderlich, die auch mit steigender Dateigröße zurechtkommt.
  
-    • Speichereffizienz und Skalierbarkeit: Um das kontinuierlich wachsende Datenvolumen zu bewältigen, ist eine skalierbare Speicherlösung erforderlich, die auch mit steigender Dateigröße zurechtkommt.
+Sicherheit (Datenschutz)
+- Datenintegrität und Datenschutz: Alle hochgeladenen Dateien und Benutzerdaten müssen sicher gespeichert und übertragen werden. Es ist wichtig, Datenschutzvorgaben zu erfüllen und entsprechende Sicherheitsprotokolle umzusetzen, um Compliance und Datensicherheit zu gewährleisten
+- Benutzerrollen und Berechtigungen
+  
+Verfügbarkeit und Zuverlässigkeit der Anwendung:
+- Systemverfügbarkeit bei hoher Benutzerlast: Hohe Benutzerzahlen oder plötzliche Traffic-Spitzen können das System überlasten.
+- Datenverlust und Systemausfälle
+- Einheitliche Links: Benutzer benötigen oft einen konsistenten Link für den Upload-Prozess. Die Implementierung eines Systems, das dauerhaft zugängliche Links unterstützt, ist erforderlich, um ein gleichbleibendes Benutzererlebnis zu bieten.
+- Skalierbare gleichzeitige Nutzung: Da mehrere Benutzer gleichzeitig auf die Anwendung zugreifen könnten, ist eine skalierbare Architektur erforderlich, die gleichzeitige Uploads und Downloads ohne Leistungseinbußen ermöglicht.
  
--Sicherheit (Datenschutz):
-
-    •	Datenintegrität und Datenschutz: Alle hochgeladenen Dateien und Benutzerdaten müssen sicher gespeichert und übertragen werden. Es ist wichtig, Datenschutzvorgaben zu erfüllen und entsprechende Sicherheitsprotokolle umzusetzen, um Compliance und Datensicherheit zu gewährleisten.
-  
-    •	Benutzerrollen und Berechtigungen
-  
--Verfügbarkeit und Zuverlässigkeit der Anwendung:
-  
-    •	Systemverfügbarkeit bei hoher Benutzerlast: Hohe Benutzerzahlen oder plötzliche Traffic-Spitzen können das System überlasten.
-  
-    •	Datenverlust und Systemausfälle
-  
-    •	Einheitliche Links: Benutzer benötigen oft einen konsistenten Link für den Upload-Prozess. Die Implementierung eines Systems, das dauerhaft zugängliche Links unterstützt, ist erforderlich, um ein gleichbleibendes Benutzererlebnis zu bieten.
-  
-	  •	Skalierbare gleichzeitige Nutzung: Da mehrere Benutzer gleichzeitig auf die Anwendung zugreifen könnten, ist eine skalierbare Architektur erforderlich, die gleichzeitige Uploads und Downloads ohne Leistungseinbußen ermöglicht.
- 
--Bildqualität und Dateiformat-Management:
-
-  	•	Vielseitige Formatunterstützung: Um Kompatibilität sicherzustellen, muss die Anwendung verschiedene Bild-, Video- und Audioformate unterstützen.
-   
-    •	Qualitätserhaltung bei Komprimierung
+Bildqualität und Dateiformat-Management:
+- Vielseitige Formatunterstützung: Um Kompatibilität sicherzustellen, muss die Anwendung verschiedene Bild-, Video- und Audioformate unterstützen.
+- Qualitätserhaltung bei Komprimierung
 
 
 
@@ -97,7 +87,8 @@ Kunde
 4. Prüfen, ob verschiedene Komprimierungsalgorithmen eine akzeptable Qualitätsstufe bei unterschiedlichen Dateiformaten (z. B. JPEG, PNG, MP4) gewährleisten
 5. Prüfen, ob Nutzer während des Upload- und Verarbeitungsprozesses durch Fortschrittsanzeigen und Rückmeldungen ausreichend informiert werden
 
-Alle Prüfungen sollen für alle Medientypen durchgeführt werden (JPEG, PNG, MP3, MP4) 
+Alle Prüfungen sollen für alle Medientypen durchgeführt werden (JPEG, PNG, MP3, MP4)
+
 # Marktanalyse
 
 1. Compress JPEG/PNG/GIF/PDF compressing.com
