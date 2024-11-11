@@ -81,11 +81,10 @@ Bildqualität und Dateiformat-Management:
 
 # Erste POC´s
 
-1. Prüfen, ob ausgewählte Frameworks Dateiverkleinerung korrekt ausführen
-2. Prüfen, ob die Frameworks die Option einer Qualitätsanpassung bei der Verkleinerung anbieten
-3. Prüfen, ob das System mehrere gleichzeitige Datei-Uploads stabil und performant verarbeitet
-4. Prüfen, ob verschiedene Komprimierungsalgorithmen eine akzeptable Qualitätsstufe bei unterschiedlichen Dateiformaten (z. B. JPEG, PNG, MP4) gewährleisten
-5. Prüfen, ob Nutzer während des Upload- und Verarbeitungsprozesses durch Fortschrittsanzeigen und Rückmeldungen ausreichend informiert werden
+1. Prüfen, ob die Frameworks die Option einer Qualitätsanpassung bei der Verkleinerung anbieten
+2. Prüfen, ob das System mehrere gleichzeitige Datei-Uploads stabil und performant verarbeitet
+3. Prüfen, ob verschiedene Komprimierungsalgorithmen eine akzeptable Qualitätsstufe bei unterschiedlichen Dateiformaten (z. B. JPEG, PNG, MP4) gewährleisten
+4. Prüfen, ob Nutzer während des Upload- und Verarbeitungsprozesses durch Fortschrittsanzeigen und Rückmeldungen ausreichend informiert werden
 
 Alle Prüfungen sollen für alle Medientypen durchgeführt werden (JPEG, PNG, MP3, MP4)
 
