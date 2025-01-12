@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "axios": "^1.7.8",
+    "firebase": "^11.1.0",
     "fluent-ffmpeg": "^2.1.3",
     "formidable": "^3.5.2",
     "nuxt": "^3.14.1592",

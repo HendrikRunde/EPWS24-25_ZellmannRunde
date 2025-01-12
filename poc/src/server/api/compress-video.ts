@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
         ffmpeg(videoPath) // Komprimierung einer Videodatei (ffmpeg Bibliothek für Videodateien)
           .outputOptions([
             '-c:v libx264',
-            '-preset ultrafast',  // Ändere dies je nach gewünschter Geschwindigkeit/Qualität, je schneller desto weniger komprimiert: ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow.
+            '-preset fast',  // Ändere dies je nach gewünschter Geschwindigkeit/Qualität, je schneller desto weniger komprimiert: ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow.
             '-crf 23'        // Ändere dies je nach gewünschter Qualität (z.B. 18-28)
           ])
           .save(outputPath)
