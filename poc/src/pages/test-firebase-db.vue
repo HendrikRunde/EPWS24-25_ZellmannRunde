@@ -1,56 +1,60 @@
 <template>
+  <div>
+    <h1>POC Read/Write to Firebase Realtime Database</h1>
+
     <div>
-      <h1>POC Read/Write to Firebase Realtime Database</h1>
-      
-      <div>
-        <input v-model="inputValue" placeholder="Enter some text">
-        <button @click="writeData">Write Data</button>
-      </div>
-  
-      <div>
-        <h2>Read Data:</h2>
-        <p>{{ readData }}</p>
-      </div>
+      <input v-model="inputValue" placeholder="Enter some text">
+      <button @click="writeData">Write Data</button>
     </div>
-  </template>
-  
-  <script>
-  import firebase from '../plugins/firebase';  // Aktualisierter Pfad und Import
-  import { ref, set, onValue } from 'firebase/database';
-  
-  export default {
-    data() {
-      return {
-        inputValue: '',
-        readData: ''
-      };
-    },
-    methods: {
-      writeData() {
-        const dbRef = ref(firebase.database, 'myData');
-        set(dbRef, {
-          text: this.inputValue
-        }).then(() => {
-          console.log('Data written successfully');
-        }).catch((error) => {
-          console.error('Error writing data:', error);
-        });
-      },
-      fetchData() { // Namensänderung hier
-        const dbRef = ref(firebase.database, 'myData');
-        onValue(dbRef, (snapshot) => {
-          const data = snapshot.val();
-          if (data) {
-            this.readData = data.text;
-          } else {
-            this.readData = 'No data available';
-          }
-        });
-      }
-    },
-    mounted() {
-      this.fetchData();
+
+    <div>
+      <h2>Read Data:</h2>
+      <p>{{ readData }}</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import firebase from '../plugins/firebase' // Aktualisierter Pfad und Import
+import { ref as dbRef, set, onValue } from 'firebase/database'
+
+// Reaktive Referenzen definieren
+const inputValue = ref('')
+const readData = ref('')
+
+//kein page layout verwenden
+definePageMeta({
+  layout: 'empty'
+})
+
+// Funktion zum Schreiben von Daten in die Firebase-Datenbank
+function writeData() {
+  const databaseRef = dbRef(firebase.database, 'myData')
+  set(databaseRef, {
+    text: inputValue.value
+  }).then(() => {
+    console.log('Data written successfully')
+  }).catch((error) => {
+    console.error('Error writing data:', error)
+  })
+}
+
+// Funktion zum Lesen von Daten aus der Firebase-Datenbank
+function fetchData() {
+  const databaseRef = dbRef(firebase.database, 'myData')
+  onValue(databaseRef, (snapshot) => {
+    const data = snapshot.val()
+    if (data) {
+      readData.value = data.text
+    } else {
+      readData.value = 'No data available'
     }
-  };
-  </script>
-  
+  })
+}
+
+// Daten abrufen, wenn die Komponente gemountet wird
+onMounted(() => {
+  fetchData()
+})
+</script>

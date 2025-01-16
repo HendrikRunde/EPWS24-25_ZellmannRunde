@@ -2,8 +2,9 @@
   <div>
     <h1>Video Compression</h1>
     <input type="file" accept="video/mp4" multiple @change="handleFileUpload" />
+
     <div v-if="compressionResults.length">
-      <div v-for="result in compressionResults" :key="result.id">
+      <div v-for="(result, index) in compressionResults" :key="index">
         <p><strong>Original Size:</strong> {{ result.originalSize }} bytes</p>
         <p><strong>Compressed Size:</strong> {{ result.compressedSize }} bytes</p>
         <p><strong>Compression Ratio:</strong> {{ result.ratio.toFixed(2) }}%</p>
@@ -20,50 +21,71 @@
   </div>
 </template>
 
-<script>
-import axios from 'axios';
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios'
 
-export default {
-  data() {
-    return {
-      compressionResults: [],
-      progress: 0,
-    };
-  },
-  methods: {
-    async handleFileUpload(event) {
-      const files = Array.from(event.target.files);
-      if (!files.length) return;
+//kein page layout verwenden
+definePageMeta({
+  layout: 'empty'
+})
 
-      this.compressionResults = [];
-      this.progress = 0;
 
-      const totalFiles = files.length;
+// Reaktive Referenzen
+const compressionResults = ref([])
+const progress = ref(0)
 
-      for (let i = 0; i < totalFiles; i++) {
-        const file = files[i];
-        const formData = new FormData();
-        formData.append('video', file);
+// Funktion zum Hochladen und Komprimieren von Dateien
+const handleFileUpload = async (event) => {
+  console.log('handleFileUpload event:', event)
 
-        try {
-          const response = await axios.post('/api/compress-video', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
+  const input = event.target
+  if (!input || !input.files) {
+    console.error('No files selected or target not found.')
+    return
+  }
 
-          this.compressionResults.push(response.data);
-          this.progress = ((i + 1) / totalFiles) * 100;
-        } catch (error) {
-          console.error('Error:', error);
-          this.compressionResults.push({
-            success: false,
-            error: error.message,
-          });
-          this.progress = ((i + 1) / totalFiles) * 100;
-        }
+  const files = Array.from(input.files)
+  console.log('Selected files:', files)
+
+  if (files.length === 0) return
+
+  compressionResults.value = []
+  progress.value = 0
+
+  const totalFiles = files.length
+
+  for (let i = 0; i < totalFiles; i++) {
+    const file = files[i]
+    console.log('Processing file:', file.name)
+    
+    const formData = new FormData()
+    formData.append('video', file)
+
+    try {
+      const response = await axios.post('/api/compress-video', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+
+      console.log('API response:', response.data) // Überprüfe die Daten in der Konsole
+
+      if (Array.isArray(response.data)) {
+        compressionResults.value.push(...response.data)
+      } else {
+        compressionResults.value.push(response.data)
       }
-    },
-  },
-};
+
+      progress.value = ((i + 1) / totalFiles) * 100
+    } catch (error) {
+      console.error('Error during API call:', error)
+      compressionResults.value.push({
+        success: false,
+        error: error.message,
+      })
+      progress.value = ((i + 1) / totalFiles) * 100
+    }
+  }
+
+  console.log('Final compression results:', compressionResults.value)
+}
 </script>

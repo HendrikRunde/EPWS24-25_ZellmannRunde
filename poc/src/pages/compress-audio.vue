@@ -26,59 +26,74 @@
   </div>
 </template>
 
-<script>
-import axios from 'axios';
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios'
 
-export default {
-  data() {
-    return {
-      compressionResults: [],
-      progress: 0,
-      currentFileName: "", // Hinzufügen eines Feldes für den aktuellen Dateinamen
-    };
-  },
-  methods: {
-    async handleFileUpload(event) {
-      const files = Array.from(event.target.files);
-      if (!files.length) return;
+//kein page layout verwenden
+definePageMeta({
+  layout: 'empty'
+})
 
-      this.compressionResults = [];
-      this.progress = 0;
+// Reaktive Referenzen
+const compressionResults = ref([])
+const progress = ref(0)
+const currentFileName = ref("")
 
-      const totalFiles = files.length;
+// Funktion zum Hochladen und Komprimieren von Dateien
+const handleFileUpload = async (event) => {
+  console.log('handleFileUpload event:', event)
 
-      for (let i = 0; i < totalFiles; i++) {
-        const file = files[i];
-        this.currentFileName = file.name; // Setzen des aktuellen Dateinamens
-        const formData = new FormData();
-        formData.append('audio', file);
+  const input = event.target
+  if (!input || !input.files) {
+    console.error('No files selected or target not found.')
+    return
+  }
 
-        try {
-          const response = await axios.post('/api/compress-audio', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          });
+  const files = Array.from(input.files)
+  console.log('Selected files:', files)
 
-          console.log(response.data); // Überprüfe die Daten in der Konsole
+  if (files.length === 0) return
 
-          if (Array.isArray(response.data)) {
-            this.compressionResults.push(...response.data);
-          } else {
-            this.compressionResults.push(response.data);
-          }
+  compressionResults.value = []
+  progress.value = 0
 
-          this.progress = ((i + 1) / totalFiles) * 100;
-        } catch (error) {
-          console.error('Error:', error);
-          this.compressionResults.push({
-            success: false,
-            error: error.message,
-          });
-          this.progress = ((i + 1) / totalFiles) * 100;
-        }
+  const totalFiles = files.length
 
-        this.currentFileName = ""; // Zurücksetzen des aktuellen Dateinamens nach der Verarbeitung
+  for (let i = 0; i < totalFiles; i++) {
+    const file = files[i]
+    currentFileName.value = file.name // Setzen des aktuellen Dateinamens
+    console.log('Processing file:', currentFileName.value)
+    
+    const formData = new FormData()
+    formData.append('audio', file)
+
+    try {
+      const response = await axios.post('/api/compress-audio', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+
+      console.log('API response:', response.data) // Überprüfe die Daten in der Konsole
+
+      if (Array.isArray(response.data)) {
+        compressionResults.value.push(...response.data)
+      } else {
+        compressionResults.value.push(response.data)
       }
-    },
-  },
-};
+
+      progress.value = ((i + 1) / totalFiles) * 100
+    } catch (error) {
+      console.error('Error during API call:', error)
+      compressionResults.value.push({
+        success: false,
+        error: error.message,
+      })
+      progress.value = ((i + 1) / totalFiles) * 100
+    }
+
+    currentFileName.value = "" // Zurücksetzen des aktuellen Dateinamens nach der Verarbeitung
+  }
+
+  console.log('Final compression results:', compressionResults.value)
+}
 </script>
