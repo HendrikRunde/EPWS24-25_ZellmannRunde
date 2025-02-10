@@ -1,0 +1,11 @@
+**ADR 3: Wahl von Firebase für die Cloud-Infrastruktur**
+
+Datum: 27.11.2024
+Status: Final
+Kontext: Wir benötigen eine skalierbare, serverlose Lösung für die Speicherung von Benutzerdaten, Dateien und Optimierungsergebnissen.
+Entscheidung: Wir verwenden Google Firebase (Realtime Database).
+Begründung: Firebase bietet eine skalierbare, serverlose Architektur mit eingebauten Funktionen wie Authentifizierung und Datenbankverwaltung. Es lässt sich gut mit JavaScript und Nuxt.js integrieren.
+Alternativen:
+AWS S3 mit DynamoDB: Leistungsstark, aber komplexer einzurichten und zu warten.
+MongoDB Atlas: Gut für komplexere Datenmodelle, aber zusätzliche Infrastruktur erforderlich.
+Konsequenzen: Firebase ist einfach zu starten, aber die Kosten können bei steigender Nutzung schnell wachsen. Es besteht die Gefahr eines Vendor Lock-ins.
