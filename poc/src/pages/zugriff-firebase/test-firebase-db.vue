@@ -53,7 +53,7 @@ function fetchData() {
   })
 }
 
-// Daten abrufen, wenn die Komponente gemountet wird
+// Daten abrufen, wenn die Komponente eingebunden wird
 onMounted(() => {
   fetchData()
 })
