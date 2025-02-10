@@ -1,0 +1,11 @@
+ADR 1: Wahl von Vue.js für das Frontend
+
+Datum: 27.11.2024
+Status: Final
+Kontext: Wir benötigen ein Framework, das eine intuitive, benutzerfreundliche Benutzeroberfläche ermöglicht, modular aufgebaut ist und eine schnelle Entwicklung erlaubt.
+Entscheidung: Wir verwenden Vue.js als Frontend-Framework.
+Begründung: Vue.js ist einfach zu erlernen, flexibel und wird von einer großen Community unterstützt. Es ermöglicht eine schnelle Entwicklung und bietet eine gute Performance für eine Webanwendung wie ShrinkIT.
+Alternativen:
+React: Ebenfalls stark, aber komplexer und eher für größere Projekte gedacht.
+Angular: Leistungsstark, aber überdimensioniert für die Anforderungen von ShrinkIT.
+Konsequenzen: Entwickler müssen mit Vue.js vertraut sein. Der Fokus auf Vue.js erleichtert die Integration mit Nuxt.js im Backend.
