@@ -1,4 +1,4 @@
-ADR 1: Wahl von Vue.js für das Frontend
+**ADR 1: Wahl von Vue.js für das Frontend**
 
 Datum: 27.11.2024
 Status: Final
@@ -9,3 +9,17 @@ Alternativen:
 React: Ebenfalls stark, aber komplexer und eher für größere Projekte gedacht.
 Angular: Leistungsstark, aber überdimensioniert für die Anforderungen von ShrinkIT.
 Konsequenzen: Entwickler müssen mit Vue.js vertraut sein. Der Fokus auf Vue.js erleichtert die Integration mit Nuxt.js im Backend.
+
+
+
+**ADR 4: Wahl von Bootstrap für das UI-Design**
+
+Datum: 27.11.2024
+Status: Final
+Kontext: Wir benötigen ein Framework, das die schnelle Entwicklung einer responsiven und ansprechenden Benutzeroberfläche ermöglicht.
+Entscheidung: Wir verwenden Bootstrap für das UI-Design.
+Begründung: Bootstrap bietet vorgefertigte Komponenten und eine starke Community-Unterstützung, was die Entwicklungszeit verkürzt.
+Alternativen:
+Tailwind CSS: Flexibler, aber höhere Einstiegshürde und längere Implementationszeit.
+Material-UI: Attraktiv, aber komplexer und schwerer anzupassen.
+Konsequenzen: Die Anwendung könnte standardisiert wirken, wenn Bootstrap-Komponenten nicht angepasst werden. Langfristig könnte ein Wechsel zu einem individuelleren Framework nötig sein.
