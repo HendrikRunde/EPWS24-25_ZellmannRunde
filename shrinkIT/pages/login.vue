@@ -17,13 +17,13 @@
           <div class="card-body">
             <form @submit.prevent="handleLogin">
               <div class="mb-3">
-                <input type="email" class="form-control" placeholder="Email" aria-label="Email" v-model="email" required>
+                <input type="email" class="form-control" placeholder="Email" aria-label="Email" v-model="email" autocomplete="new-email" required>
               </div>
               <div class="mb-3">
-                <input type="password" class="form-control" placeholder="Passwort" aria-label="Passwort" v-model="password" required>
+                <input type="password" class="form-control" placeholder="Passwort" aria-label="Passwort" v-model="password" autocomplete="new-password" required>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Login</button>
+                <button type="submit" class="btn btn-primary w-100 my-4 mb-2">Login</button>
               </div>
               <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
             </form>
@@ -63,8 +63,12 @@ definePageMeta({
 })
 </script>
 
-<style scoped>
+<style>
 .error {
   color: red;
+}
+
+main .bg-dark {
+  background-color: transparent !important;
 }
 </style>
