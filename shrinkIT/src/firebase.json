@@ -43,7 +43,11 @@
     "rules": "storage.rules"
   },
   "database": {
-    "rules": "database.rules.json"
+    "rules": {
+      "uploads": {
+        ".indexOn": ["directLink"]
+      }
+    }
   },
   "hosting": {
     "public": "public",

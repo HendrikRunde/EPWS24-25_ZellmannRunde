@@ -68,7 +68,7 @@ definePageMeta({
   color: red;
 }
 
-main .bg-dark {
+/* main .bg-dark {
   background-color: transparent !important;
-}
+} */
 </style>

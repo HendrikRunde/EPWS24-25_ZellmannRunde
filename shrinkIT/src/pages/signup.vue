@@ -30,34 +30,30 @@
                     <input type="email" id="email" class="form-control" placeholder="Email *" aria-label="Email" v-model="email" @input="validateEmail" autocomplete="off" required>
                     <p v-if="emailError" class="text-danger">{{ emailError }}</p>
                   </div>
-                  <div class="mb-3">
-                    <input type="password" id="password" class="form-control" placeholder="Passwort *" aria-label="Passwort" autocomplete="new-password"
-                      v-model="password" required>
-                  </div>
+
                   <div class="mb-3">
                     <input type="text" id="profession" class="form-control" placeholder="Beruf" aria-label="Beruf" v-model="profession">
                   </div>
-                  <div class="mb-3">
-                    <input type="text" id="company" class="form-control" placeholder="Firma" aria-label="Firma" v-model="company">
-                  </div>                  
+
                 </div>
                 <div class="col-md-6">
 
                   <div class="mb-3">
                     <label for="profilePicture">Profilbild</label>
-                    <input type="file" id="profilePicture" class="form-control" @change="handleFileUpload">
+                    <input type="file" id="profilePicture" class="form-control" @change="handleProfileFileUpload">
                   </div>
                   <div class="mb-3" v-if="profilePictureUrl">
                     <img :src="profilePictureUrl" alt="Profile Picture Preview" style="max-height: 150px;" class="img-thumbnail" />
                   </div>
+
                   <div class="mb-3">
-                    <label for="background">Hintergrund</label>
-                    <select id="background" class="form-control dropdown" v-model="selectedBackground">
-                      <option value="">Kein</option>
-                      <option value="/assets/img/user/bg1.jpg">Hintergrund1 (Designer)</option>
-                      <option value="/assets/img/user/bg2.jpg">Hintergrund2 (Podcaster)</option>
-                    </select>
+                    <label for="backgroundPicture">Hintergrundbild</label>
+                    <input type="file" id="backgroundPicture" class="form-control" @change="handleBackgroundFileUpload">
                   </div>
+                  <div class="mb-3" v-if="backgroundPictureUrl">
+                    <img :src="backgroundPictureUrl" alt="Profile Picture Preview" style="max-height: 150px;" class="img-thumbnail" />
+                  </div>
+
                   <div class="mb-3" v-if="selectedBackground">
                     <img :src="selectedBackground" alt="Background Preview" style="max-height: 150px;" class="img-thumbnail" />
                   </div>
@@ -89,13 +85,16 @@ const company = ref('')
 const password = ref('')
 const errorMessage = ref('')
 const profilePicture = ref<File | null>(null)
+const backgroundPicture = ref<File | null>(null)
+
 const profilePictureUrl = ref<string | null>(null)
+const backgroundPictureUrl = ref<string | null>(null)
 const selectedBackground = ref<string | null>(null)
 const emailError = ref<string | null>(null)
 
 // Berechnete Eigenschaft, um den Status des Buttons zu steuern
 const isFormValid = computed(() => {
-  return firstname.value && lastname.value && email.value && password.value && !emailError.value
+  return firstname.value && lastname.value && email.value && !emailError.value
 })
 
 // Router-Instanz
@@ -114,7 +113,6 @@ const validateEmail = () => {
 // Funktion zum Umgang mit der Anmeldung
 const handleRegistration = async () => {
   try {
-    let profilePictureUrl = ''
 
     if (profilePicture.value) {
       const formData = new FormData()
@@ -127,10 +125,30 @@ const handleRegistration = async () => {
 
       if (uploadResponse.data.value && uploadResponse.data.value.success) {
         if ('filePath' in uploadResponse.data.value) {
-          profilePictureUrl = uploadResponse.data.value.filePath
+          profilePictureUrl.value = uploadResponse.data.value.filePath
         }
       } else {
         errorMessage.value = 'Fehler beim Hochladen des Profilbildes: ' + (uploadResponse.data.value && 'error' in uploadResponse.data.value ? uploadResponse.data.value.error : 'Unbekannter Fehler')
+        return
+      }
+    }
+
+
+    if (backgroundPicture.value) {
+      const formData = new FormData()
+      formData.append('backgroundPicture', backgroundPicture.value)
+
+      const uploadResponse = await useFetch('/api/upload-background-picture', {
+        method: 'POST',
+        body: formData
+      })
+
+      if (uploadResponse.data.value && uploadResponse.data.value.success) {
+        if ('filePath' in uploadResponse.data.value) {
+          backgroundPictureUrl.value = uploadResponse.data.value.filePath
+        }
+      } else {
+        errorMessage.value = 'Fehler beim Hochladen des Backgroundbildes: ' + (uploadResponse.data.value && 'error' in uploadResponse.data.value ? uploadResponse.data.value.error : 'Unbekannter Fehler')
         return
       }
     }
@@ -144,8 +162,8 @@ const handleRegistration = async () => {
         profession: profession.value,
         company: company.value,
         password: password.value,
-        profilePicture: profilePictureUrl,
-        background: selectedBackground.value,
+        profilePicture: profilePictureUrl.value,
+        background: backgroundPictureUrl.value,
         link: '',
         validUntil: '',
         volume: 0,
@@ -166,13 +184,25 @@ const handleRegistration = async () => {
   }
 }
 
-const handleFileUpload = (event: Event) => {
+const handleProfileFileUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (target.files && target.files.length > 0) {
     profilePicture.value = target.files[0]
     const reader = new FileReader()
     reader.onload = (e) => {
       profilePictureUrl.value = e.target?.result as string
+    }
+    reader.readAsDataURL(target.files[0])
+  }
+}
+
+const handleBackgroundFileUpload = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files.length > 0) {
+    backgroundPicture.value = target.files[0]
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      backgroundPictureUrl.value = e.target?.result as string
     }
     reader.readAsDataURL(target.files[0])
   }

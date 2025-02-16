@@ -31,8 +31,8 @@
                 <div class="card z-index-0">
                     <div class="card-body">
                         <h1>Registrierung erfolgreich</h1>
-                        <p>Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze eine E-Mail mit einem
-                            Bestätigungslink.</p>
+                        <p>Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze eine E-Mail mit Ihrem
+                            personalisierten Zugriffslink.</p>
                     </div>
                 </div>
             </div>

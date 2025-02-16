@@ -1,9 +1,9 @@
-import { defineEventHandler } from 'h3';
-import formidable from 'formidable';
-import fs from 'fs';
-import path from 'path';
-import ffmpeg from 'fluent-ffmpeg';
-import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
+import { defineEventHandler } from "h3";
+import formidable from "formidable";
+import fs from "fs";
+import path from "path";
+import ffmpeg from "fluent-ffmpeg";
+import ffmpegInstaller from "@ffmpeg-installer/ffmpeg";
 
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
@@ -18,62 +18,87 @@ interface CompressResponse {
 }
 
 export default defineEventHandler(async (event) => {
-  const uploadDir = path.join(process.cwd(), 'uploads');
-
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-  }
-
-  const form = formidable({ uploadDir, keepExtensions: true });
+  const form = formidable({ keepExtensions: true });
 
   return new Promise<CompressResponse[]>((resolve, reject) => {
     form.parse(event.node.req, async (err, fields, files) => {
       if (err) {
-        console.error('Formidable Parse Error:', err);
-        resolve([{
-          success: false,
-          error: err.message,
-        }]);
+        console.error("Formidable Parse Error:", err);
+        resolve([
+          {
+            success: false,
+            error: err.message,
+          },
+        ]);
         return;
       }
 
-      const fileList = Array.isArray(files.audio) ? files.audio : [files.audio]; // Anpassung hier
+      const userId = Array.isArray(fields.userId)
+        ? fields.userId[0]
+        : fields.userId;
+      if (!userId) {
+        resolve([
+          {
+            success: false,
+            error: "User ID is missing",
+          },
+        ]);
+        return;
+      }
+      const uploadDir = path.join(
+        process.cwd(),
+        "public/assets/uploads",
+        userId
+      );
+
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+
+      const fileList = Array.isArray(files.audio) ? files.audio : [files.audio];
       if (!fileList || fileList.length === 0) {
-        console.error('No audio files found');
-        resolve([{
-          success: false,
-          error: 'No audio files found',
-        }]);
+        console.error("No audio files found");
+        resolve([
+          {
+            success: false,
+            error: "No audio files found",
+          },
+        ]);
         return;
       }
 
       const results: CompressResponse[] = [];
 
       for (const file of fileList) {
-        if (!file) continue; // Ignoriere ungültige Einträge
+        if (!file) continue;
 
         const audioPath = file.filepath;
-        const outputFormat = 'mp3';
-        const outputPath = path.join(uploadDir, `${path.parse(audioPath).name}_compressed.${outputFormat}`);
+        const originalFilename = file.originalFilename || "default";
+        const outputFormat = "mp3";
+        const outputPath = path.join(
+          uploadDir,
+          `${path.parse(originalFilename).name}_compressed.${outputFormat}`
+        );
 
         const originalSize = fs.statSync(audioPath).size;
         const startTime = Date.now();
 
         try {
+          const audioQuality = Number(fields.audioQuality) || 128;
+          const bitrate = Math.round((audioQuality / 100) * 320); // Convert quality percentage to bitrate (max 320 kbps)
+
           await new Promise<void>((res, rej) => {
             ffmpeg(audioPath)
-              .outputOptions([
-                '-c:a libmp3lame',
-                '-b:a 128k', // Bitrate anpassen je nach gewünschter Qualität
-              ])
+              .outputOptions(["-c:a libmp3lame", `-b:a ${bitrate}k`])
               .save(outputPath)
-              .on('end', () => {
+              .on("end", () => {
                 const endTime = Date.now();
                 const compressedSize = fs.statSync(outputPath).size;
-                const ratio = ((originalSize - compressedSize) / originalSize) * 100;
+                const ratio =
+                  ((originalSize - compressedSize) / originalSize) * 100;
                 const timeTaken = endTime - startTime;
 
-                console.log('Audio compressed successfully:', audioPath);
+                console.log("Audio compressed successfully:", audioPath);
                 console.log(`Original Size: ${originalSize} bytes`);
                 console.log(`Compressed Size: ${compressedSize} bytes`);
                 console.log(`Compression Ratio: ${ratio.toFixed(2)}%`);
@@ -81,7 +106,7 @@ export default defineEventHandler(async (event) => {
 
                 results.push({
                   success: true,
-                  outputPath,
+                  outputPath: path.relative(process.cwd(), outputPath),
                   originalSize,
                   compressedSize,
                   ratio,
@@ -90,18 +115,18 @@ export default defineEventHandler(async (event) => {
 
                 res();
               })
-              .on('error', (err) => {
-                console.error('FFmpeg Error:', err);
+              .on("error", (err) => {
+                console.error("FFmpeg Error:", err);
                 results.push({
                   success: false,
                   error: err.message,
                 });
 
-                res(); // resolve to continue with next files
+                res();
               });
           });
         } catch (error) {
-          console.error('FFmpeg Error:', error);
+          console.error("FFmpeg Error:", error);
           results.push({
             success: false,
             error: (error as Error).message,

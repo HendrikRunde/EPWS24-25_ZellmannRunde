@@ -8,12 +8,14 @@
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
         <ul class="navbar-nav justify-content-end">
-          <li class="nav-item d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-              <i class="fa fa-user me-sm-1"></i>
-              <span class="d-sm-inline d-none">Abmelden</span>
-            </a>
+          <li class="nav-item px-3 d-flex align-items-center">
+            <NuxtLink to="/system-configuration" class="nav-link text-white p-0">
+              <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer me-sm-1"></i>
+              <span class="d-sm-inline d-none">Konfiguration</span>
+            </NuxtLink>
           </li>
+
+
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
               <div class="sidenav-toggler-inner">
@@ -23,17 +25,19 @@
               </div>
             </a>
           </li>
-          <li class="nav-item px-3 d-flex align-items-center">
-            <NuxtLink to="/system-configuration" class="nav-link text-white p-0">
-              <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer me-sm-1"></i>
-              <span class="d-sm-inline d-none">Konfiguration</span>
+
+          <li class="nav-item d-flex align-items-center">
+            <NuxtLink to="/login" class="nav-link text-white font-weight-bold px-0">
+              <i class="fa fa-user me-sm-1"></i>
+              <span class="d-sm-inline d-none">Abmelden</span>
             </NuxtLink>
           </li>
-          <li class="nav-item dropdown pe-2 d-flex align-items-center">
+
+          <!-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-bell cursor-pointer"></i>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -42,20 +46,20 @@
 
   <div class="container-fluid py-4">
     <div class="row">
+      <InfoCard title="Registrierte Benutzer" :value="users.length" iconClass="ni ni-circle-08" iconBgClass="bg-gradient-danger" />
       <InfoCard title="Speicherplatz pro Benutzer" :value="`${systemConfig.maxVolume} MB`" iconClass="ni ni-money-coins" iconBgClass="bg-gradient-primary" />
-      <InfoCard title="Aktuelle Benutzeranzahl" :value="users.length" iconClass="ni ni-circle-08" iconBgClass="bg-gradient-danger" />
       <InfoCard title="Verwendeter Speicherplatz aller Benutzer" :value="`${totalUsedStorage} MB`" iconClass="ni ni-paper-diploma" iconBgClass="bg-gradient-success" />
     </div>
 
     <div class="row" style="padding-top: 20px;">
+      <InfoCard title="Bilder" :value="`${systemConfig.photoQuality} %`" iconClass="ni ni-image" iconBgClass="bg-gradient-success" />
       <InfoCard title="Videos" :value="`${systemConfig.videoQuality} %`" iconClass="ni ni-tv-2" iconBgClass="bg-gradient-danger" />
-      <InfoCard title="Fotos" :value="`${systemConfig.audioQuality} %`" iconClass="ni ni-image" iconBgClass="bg-gradient-success" />
-      <InfoCard title="Audio" :value="`${systemConfig.photoQuality} %`" iconClass="ni ni-note-03" iconBgClass="bg-gradient-warning" />
+      <InfoCard title="Audio" :value="`${systemConfig.audioQuality} %`" iconClass="ni ni-note-03" iconBgClass="bg-gradient-warning" />
     </div>
 
     <div class="row" style="padding-top: 20px;">
+      <InfoCard title="Bilder" :value="totalPhotos" iconClass="ni ni-image" iconBgClass="bg-gradient-success" />
       <InfoCard title="Videos" :value="totalVideos" iconClass="ni ni-tv-2" iconBgClass="bg-gradient-danger" />
-      <InfoCard title="Fotos" :value="totalPhotos" iconClass="ni ni-image" iconBgClass="bg-gradient-success" />
       <InfoCard title="Audio" :value="totalAudios" iconClass="ni ni-note-03" iconBgClass="bg-gradient-warning" />
     </div>
 
@@ -111,15 +115,14 @@ onMounted(async () => {
 })
 
 const sendPersonalizedLink = async (user, action) => {
-  const idFromEmail = user.email.replace(/[.#$[\]]/g, "_");
   const { data, error } = await useFetch('/api/create-personalized-link', {
     method: 'POST',
-    body: { email: idFromEmail }
+    body: { userId: user.id, }
   })
 
   if (data.value && data.value.success) {
     const link = `${window.location.origin}/${data.value.link}`;
-    const emailBody = `Hallo ${user.firstname} ${user.lastname},\n\nIhr personalisierter Link wurde ${action}. Klicken Sie auf folgenden Hyperlink, um direkt in die Anwendung zu kommen: ${link}\n\nMit freundlichen Grüßen,\nIhr shrinkIT Team`
+    const emailBody = `Hallo ${user.firstname} ${user.lastname},\n\nIhr personalisierter Zugriffslink wurde ${action}. Klicken Sie auf folgenden Hyperlink, um direkt in die Anwendung zu kommen: ${link}\n\nMit freundlichen Grüßen,\nIhr shrinkIT Team`
     await useFetch('/api/sendemail', {
       method: 'POST',
       body: {
@@ -129,7 +132,7 @@ const sendPersonalizedLink = async (user, action) => {
       }
     })
 
-    popupMessage.value = `Personalisierter Link für Benutzer ${user.firstname} ${user.lastname} wurde ${action}. Link wurde per Email an die ${user.email} gesendet.\nLink: ${data.value.link}`
+    popupMessage.value = `Personalisierter Zugriffslink für Benutzer "${user.firstname} ${user.lastname}" wurde ${action} und per Email an ${user.email} gesendet.\nLink: ${data.value.link}`
     showPopup.value = true
     user.link = data.value.link
     user.validUntil = data.value.validUntil

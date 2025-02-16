@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "uploads": {
+      "$userId": {
+        ".indexOn": ["directLink"]
+      }
+    }
+  }
+}

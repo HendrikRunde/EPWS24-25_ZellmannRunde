@@ -1,7 +1,7 @@
 <template>
-    <div v-if="error">
+    <!-- <div v-if="error">
       <h1>Wrong Quick Link</h1>
-    </div>
+    </div> -->
   </template>
   
   <script setup>
@@ -28,7 +28,7 @@
         myData = useState('myData', () => (data))
         router.push('/uploads')
       } else {
-        router.push('/login')
+        router.push('/invalid')
         error.value = true
       }
     } catch (err) {

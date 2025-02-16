@@ -31,18 +31,17 @@ function generateRandomString(length: number) {
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const email = body.email;
+    const userId = body.userId;
 
-    if (!email) {
-      throw new Error("Email is required");
+    if (!userId) {
+      throw new Error("userId is required");
     }
 
-    const sanitizedEmail = email.replace(/\./g, "_");
     const link = generateRandomString(32);
     const validUntil = new Date();
     validUntil.setMonth(validUntil.getMonth() + 3);
 
-    const userRef = ref(database, `users/${sanitizedEmail}`);
+    const userRef = ref(database, `users/${userId}`);
 
     await update(userRef, {
       link,

@@ -1,8 +1,18 @@
 // filepath: /C:/DevProjects/test/nuxt/shrinkIT/server/api/register-user.ts
 import { defineEventHandler, readBody } from "h3";
 import { initializeApp } from "firebase/app";
-import { child, get, getDatabase, ref, set } from "firebase/database";
+import {
+  child,
+  get,
+  getDatabase,
+  ref,
+  set,
+  query,
+  orderByChild,
+  equalTo,
+} from "firebase/database";
 import bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from "uuid";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -41,16 +51,23 @@ export default defineEventHandler(async (event) => {
   } = body;
 
   try {
-    const userId = email.replace(/[.#$[\]]/g, "_"); // Firebase keys cannot contain special chars [.#$[\]
-    const userRef = ref(database, "users/" + userId);
-    const snapshot = await get(child(ref(database), `users/${userId}`));
+    // Check if the email is already used
+    const emailQuery = query(
+      ref(database, "users"),
+      orderByChild("email"),
+      equalTo(email)
+    );
+    const emailSnapshot = await get(emailQuery);
 
-    if (snapshot.exists()) {
+    if (emailSnapshot.exists()) {
       return {
         success: false,
         error: "Benutzer mit dieser E-Mail existiert bereits.",
       };
     }
+
+    const userId = uuidv4(); // Generate a GUID for the user ID
+    const userRef = ref(database, "users/" + userId);
 
     // Get the system configuration
     const systemConfigSnapshot = await get(
@@ -72,6 +89,7 @@ export default defineEventHandler(async (event) => {
     const createdAt = new Date().toISOString();
 
     await set(userRef, {
+      id: userId,
       firstname,
       lastname,
       email,

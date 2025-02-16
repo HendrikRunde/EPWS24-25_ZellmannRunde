@@ -16,7 +16,7 @@
                 <div class="card z-index-0">
                     <div class="card-body text-center">
                         <div>
-                            <label for="maxVolume">Max Volume:</label>
+                            <label for="maxVolume">Max. Speicherplatz pro Benutzer:</label>
                             <div class="mb-3 d-flex align-items-center justify-content-center">
                                 <input id="maxVolume" class="form-control input-small" type="number" v-model.number="config.maxVolume"
                                     placeholder="Enter max volume">
@@ -28,7 +28,17 @@
                         </div>
 
                         <div>
-                            <label for="videoQuality">Video Quality:</label>
+                            <label for="photoQuality">Bildqualität:</label>
+                            <div class="mb-3 d-flex align-items-center justify-content-center">
+                                <input id="photoQuality" class="form-control input-small" type="number" v-model.number="config.photoQuality"
+                                    placeholder="Enter photo quality">
+                                <span class="ms-2">%</span>
+                            </div>
+                            <span v-if="errors.photoQuality" class="text-danger">{{ errors.photoQuality }}</span>
+                        </div>
+
+                        <div>
+                            <label for="videoQuality">Videoqualität:</label>
                             <div class="mb-3 d-flex align-items-center justify-content-center">
                                 <input id="videoQuality" class="form-control input-small" type="number" v-model.number="config.videoQuality"
                                     placeholder="Enter video quality">
@@ -40,7 +50,7 @@
                         </div>
 
                         <div>
-                            <label for="audioQuality">Audio Quality:</label>
+                            <label for="audioQuality">Audioqualität:</label>
                             <div class="mb-3 d-flex align-items-center justify-content-center">
                                 <input id="audioQuality" class="form-control input-small" type="number" v-model.number="config.audioQuality"
                                     placeholder="Enter audio quality">
@@ -51,15 +61,7 @@
                             </div>
                         </div>
 
-                        <div>
-                            <label for="photoQuality">Photo Quality:</label>
-                            <div class="mb-3 d-flex align-items-center justify-content-center">
-                                <input id="photoQuality" class="form-control input-small" type="number" v-model.number="config.photoQuality"
-                                    placeholder="Enter photo quality">
-                                <span class="ms-2">%</span>
-                            </div>
-                            <span v-if="errors.photoQuality" class="text-danger">{{ errors.photoQuality }}</span>
-                        </div>
+
                         <div class="text-center">
                             <button @click="goback" class="btn btn-secondary me-2">Zurück</button>
                             <button @click="writeConfig" class="btn btn-primary">Speichern</button>
