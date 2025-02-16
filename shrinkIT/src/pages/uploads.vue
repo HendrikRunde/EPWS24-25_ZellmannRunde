@@ -378,8 +378,6 @@ async function removeFile(file) {
 
 function updateCredit() {
   const totalFileSize = uploadedFiles.value.reduce((acc, file) => acc + Math.ceil(parseFloat(file.size)), 0)
-  const remainingCredit = 10 - totalFileSize // initial 10 MB Guthaben minus Gesamtgröße der hochgeladenen Dateien
-  //credit.value = remainingCredit >= 0 ? remainingCredit : 0
   if (totalFileSize > credit.value) {
     insufficientCreditMessage.value = `Sie haben ${uploadedFiles.value.length} Datei(en) mit einer Gesamtgröße von ${totalFileSize} MB ausgewählt.<br>Ihr Guthaben von ${credit.value} MB wurde um ${(totalFileSize - credit.value)} MB überschritten.`
     showCreditPopup.value = true

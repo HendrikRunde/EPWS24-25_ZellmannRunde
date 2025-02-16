@@ -1,16 +1,13 @@
 <template>
   <!-- Navbar -->
-  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
-    data-scroll="false">
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
-
         <h5 class="font-weight-bolder text-white mb-0">Willkommen zurück, Sebastian Weber!</h5>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-        </div>
-        <ul class="navbar-nav  justify-content-end">
+        <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+        <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
               <i class="fa fa-user me-sm-1"></i>
@@ -27,339 +24,158 @@
             </a>
           </li>
           <li class="nav-item px-3 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-white p-0">
-              <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-            </a>
+            <NuxtLink to="/system-configuration" class="nav-link text-white p-0">
+              <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer me-sm-1"></i>
+              <span class="d-sm-inline d-none">Konfiguration</span>
+            </NuxtLink>
           </li>
           <li class="nav-item dropdown pe-2 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
-              aria-expanded="false">
+            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-bell cursor-pointer"></i>
             </a>
-
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <!-- End Navbar -->
+
   <div class="container-fluid py-4">
     <div class="row">
-      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-8">
-                <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Speicherplatz pro Benutzer</p>
-                  <h5 class="font-weight-bolder">
-                    1000 MB
-                  </h5>
-                  <p class="mb-0">
-                    <span class="text-success text-sm font-weight-bolder">&nbsp;</span>
-                    &nbsp;
-                  </p>
-                </div>
-              </div>
-              <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                  <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-8">
-                <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Aktuelle Benutzeranzahl</p>
-                  <h5 class="font-weight-bolder">
-                    2
-                  </h5>
-                  <p class="mb-0">
-                    <span class="text-success text-sm font-weight-bolder">&nbsp;</span>
-                    &nbsp;
-                  </p>
-                </div>
-              </div>
-              <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                  <i class="ni ni-circle-08 text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-8">
-                <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Verwendeter Speicherplatz aller Benutzer</p>
-                  <h5 class="font-weight-bolder">
-                    1490 MB
-                  </h5>
-                  <p class="mb-0">
-                    <span class="text-danger text-sm font-weight-bolder">&nbsp;</span>
-                    &nbsp;
-                  </p>
-                </div>
-              </div>
-              <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                  <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <InfoCard title="Speicherplatz pro Benutzer" :value="`${systemConfig.maxVolume} MB`" iconClass="ni ni-money-coins" iconBgClass="bg-gradient-primary" />
+      <InfoCard title="Aktuelle Benutzeranzahl" :value="users.length" iconClass="ni ni-circle-08" iconBgClass="bg-gradient-danger" />
+      <InfoCard title="Verwendeter Speicherplatz aller Benutzer" :value="`${totalUsedStorage} MB`" iconClass="ni ni-paper-diploma" iconBgClass="bg-gradient-success" />
     </div>
 
     <div class="row" style="padding-top: 20px;">
-      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-8">
-                <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Videos</p>
-                  <h5 class="font-weight-bolder">
-                    20
-                  </h5>
-                  <p class="mb-0">
-                    <span class="text-success text-sm font-weight-bolder">&nbsp;</span>
-                    &nbsp;
-                  </p>
-                </div>
-              </div>
-              <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-danger shadow-primary text-center rounded-circle">
-                  <i class="ni ni-tv-2 text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-8">
-                <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Fotos</p>
-                  <h5 class="font-weight-bolder">
-                    110
-                  </h5>
-                  <p class="mb-0">
-                    <span class="text-success text-sm font-weight-bolder">&nbsp;</span>
-                    &nbsp;
-                  </p>
-                </div>
-              </div>
-              <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-success shadow-danger text-center rounded-circle">
-                  <i class="ni ni-image text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-8">
-                <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Audio</p>
-                  <h5 class="font-weight-bolder">
-                    210
-                  </h5>
-                  <p class="mb-0">
-                    <span class="text-danger text-sm font-weight-bolder">&nbsp;</span>
-                    &nbsp;
-                  </p>
-                </div>
-              </div>
-              <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-warning shadow-success text-center rounded-circle">
-                  <i class="ni ni-note-03 text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <InfoCard title="Videos" :value="`${systemConfig.videoQuality} %`" iconClass="ni ni-tv-2" iconBgClass="bg-gradient-danger" />
+      <InfoCard title="Fotos" :value="`${systemConfig.audioQuality} %`" iconClass="ni ni-image" iconBgClass="bg-gradient-success" />
+      <InfoCard title="Audio" :value="`${systemConfig.photoQuality} %`" iconClass="ni ni-note-03" iconBgClass="bg-gradient-warning" />
+    </div>
+
+    <div class="row" style="padding-top: 20px;">
+      <InfoCard title="Videos" :value="totalVideos" iconClass="ni ni-tv-2" iconBgClass="bg-gradient-danger" />
+      <InfoCard title="Fotos" :value="totalPhotos" iconClass="ni ni-image" iconBgClass="bg-gradient-success" />
+      <InfoCard title="Audio" :value="totalAudios" iconClass="ni ni-note-03" iconBgClass="bg-gradient-warning" />
     </div>
 
     <div class="container-fluid py-4">
-      <div class="row md-12">
-        <div class="col-12">
-          <div class="card mb-3">
-            <div class="card-header pb-0">
-              <h6>Benutzer</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Beruf</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Speicherplatz</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Gültigkeitsdatum
-                      </th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="user in users" :key="user.email">
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img :src="user.profilePicture || '/assets/img/user/default.png'"
-                              class="avatar avatar-sm me-3" :alt="user.firstname + ' ' + user.lastname">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ user.firstname }} {{ user.lastname }}</h6>
-                            <p class="text-xs text-secondary mb-0">{{ user.email }}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">{{ user.profession }}</p>
-                        <p class="text-xs text-secondary mb-0">{{ user.company }}</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ user.used }} / {{ user.volume }}
-                          MB</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ user.validUntil }}</span>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-primary">Personalisierten Link erneuern</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <UserList :users="users" :createPersLink="createPersLink" :refreshPersLink="refreshPersLink" />
     </div>
 
-
-    <footer class="footer pt-3  ">
-
-    </footer>
+    <footer class="footer pt-3"></footer>
   </div>
 
-  <!-- Modal für Neue Benutzer -->
-  <div v-if="showModal" class="modal" tabindex="-1" role="dialog"
-    style="display: block; background-color: rgba(0, 0, 0, 0.5);">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header d-flex justify-content-between">
-          <h5 class="modal-title">Neuer Benutzer</h5>
-          <button type="button" class="close" @click="closeModal">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form @submit.prevent="saveUser">
-            <div class="mb-3">
-              <label for="firstName">Vorname</label>
-              <input type="text" class="form-control" id="firstName" v-model="newUser.firstName" required>
-            </div>
-            <div class="mb-3">
-              <label for="lastName">Nachname</label>
-              <input type="text" class="form-control" id="lastName" v-model="newUser.lastName" required>
-            </div>
-            <div class="mb-3">
-              <label for="job">Beruf</label>
-              <input type="text" class="form-control" id="job" v-model="newUser.job" required>
-            </div>
-            <div class="mb-3">
-              <label for="company">Firma</label>
-              <input type="text" class="form-control" id="company" v-model="newUser.company" required>
-            </div>
-            <div class="mb-3">
-              <label for="storage">Speicherplatz (MB)</label>
-              <input type="number" class="form-control" id="storage" v-model="newUser.storage" required>
-            </div>
-            <div class="mb-3">
-              <label for="validity">Gültig bis</label>
-              <input type="date" class="form-control" id="validity" v-model="newUser.validity" required>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" @click="closeModal">Schließen</button>
-              <button type="submit" class="btn btn-primary">Speichern</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <PopupDialog :show="showPopup" :message="popupMessage" @close="closePopup" />
 </template>
-
-
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import InfoCard from '~/components/InfoCard.vue'
+import UserList from '~/components/UserList.vue'
+import PopupDialog from '~/components/PopupDialog.vue'
 
 const users = ref([])
+const systemConfig = ref({
+  maxVolume: '',
+  videoQuality: '',
+  audioQuality: '',
+  photoQuality: ''
+})
+
+const totalUsedStorage = ref(0)
+const totalVideos = ref(0)
+const totalPhotos = ref(0)
+const totalAudios = ref(0)
+const showPopup = ref(false)
+const popupMessage = ref('')
 
 onMounted(async () => {
-  const { data, error } = await useFetch('/api/get-users')
-  if (data.value && data.value.success) {
-    users.value = Object.values(data.value.users)
+  const { data: userData, error: userError } = await useFetch('/api/get-users')
+  if (userData.value && userData.value.success) {
+    users.value = Object.values(userData.value.users)
+    totalUsedStorage.value = users.value.reduce((sum, user) => sum + (user.used || 0), 0)
+    totalVideos.value = users.value.reduce((sum, user) => sum + (user.videos || 0), 0)
+    totalPhotos.value = users.value.reduce((sum, user) => sum + (user.photos || 0), 0)
+    totalAudios.value = users.value.reduce((sum, user) => sum + (user.audios || 0), 0)
   } else {
-    console.error('Error fetching users:', error.value)
+    console.error('Error fetching users:', userError.value)
+  }
+
+  const { data: configData, error: configError } = await useFetch('/api/get-system-configuration')
+  if (configData.value && configData.value.success) {
+    systemConfig.value = configData.value.config
+  } else {
+    console.error('Error fetching system configuration:', configError.value)
   }
 })
+
+const sendPersonalizedLink = async (user, action) => {
+  const idFromEmail = user.email.replace(/[.#$[\]]/g, "_");
+  const { data, error } = await useFetch('/api/create-personalized-link', {
+    method: 'POST',
+    body: { email: idFromEmail }
+  })
+
+  if (data.value && data.value.success) {
+    const link = `${window.location.origin}/${data.value.link}`;
+    const emailBody = `Hallo ${user.firstname} ${user.lastname},\n\nIhr personalisierter Link wurde ${action}. Klicken Sie auf folgenden Hyperlink, um direkt in die Anwendung zu kommen: ${link}\n\nMit freundlichen Grüßen,\nIhr shrinkIT Team`
+    await useFetch('/api/sendemail', {
+      method: 'POST',
+      body: {
+        to: user.email,
+        subject: 'Ihr personalisierter Link',
+        text: emailBody
+      }
+    })
+
+    popupMessage.value = `Personalisierter Link für Benutzer ${user.firstname} ${user.lastname} wurde ${action}. Link wurde per Email an die ${user.email} gesendet.\nLink: ${data.value.link}`
+    showPopup.value = true
+    user.link = data.value.link
+    user.validUntil = data.value.validUntil
+  } else {
+    console.error(`Fehler beim ${action} des personalisierten Links:`, error.value)
+  }
+}
+
+const createPersLink = async (user) => {
+  await sendPersonalizedLink(user, 'erstellt')
+}
+
+const refreshPersLink = async (user) => {
+  await sendPersonalizedLink(user, 'erneuert')
+}
+
+
+const closePopup = () => {
+  showPopup.value = false
+}
+
 </script>
 
 <style scoped>
-/* Deine Styles hier */
-</style>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-<style
-  scoped>
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.modal-dialog {
+  max-width: 500px;
+}
 
-  .modal-dialog {
-    max-width: 500px;
-  }
+.modal-header .close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
 
-  .modal-header .close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-  }
-
-  .close span {
-    font-size: 1.5rem;
-  }
+.close span {
+  font-size: 1.5rem;
+}
 </style>

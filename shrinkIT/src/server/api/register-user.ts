@@ -33,7 +33,6 @@ export default defineEventHandler(async (event) => {
     link,
     validUntil,
     profilePicture,
-    volume,
     used,
     videos,
     photos,
@@ -52,6 +51,19 @@ export default defineEventHandler(async (event) => {
         error: "Benutzer mit dieser E-Mail existiert bereits.",
       };
     }
+
+    // Get the system configuration
+    const systemConfigSnapshot = await get(
+      child(ref(database), `systemConfig`)
+    );
+    if (!systemConfigSnapshot.exists()) {
+      return {
+        success: false,
+        error: "Systemkonfiguration nicht gefunden.",
+      };
+    }
+    const systemConfig = systemConfigSnapshot.val();
+    const volume = systemConfig.maxVolume;
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);

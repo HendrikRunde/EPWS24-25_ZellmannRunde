@@ -16,7 +16,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import firebase from '../plugins/firebase' // Aktualisierter Pfad und Import
+import { useNuxtApp } from '#app'
 import { ref as dbRef, set, onValue } from 'firebase/database'
 
 // Reaktive Referenzen definieren
@@ -30,7 +30,8 @@ definePageMeta({
 
 // Funktion zum Schreiben von Daten in die Firebase-Datenbank
 function writeData() {
-  const databaseRef = dbRef(firebase.database, 'myData')
+  const { $firebase } = useNuxtApp()
+  const databaseRef = dbRef($firebase.database, 'myData')
   set(databaseRef, {
     text: inputValue.value
   }).then(() => {
@@ -42,7 +43,8 @@ function writeData() {
 
 // Funktion zum Lesen von Daten aus der Firebase-Datenbank
 function fetchData() {
-  const databaseRef = dbRef(firebase.database, 'myData')
+  const { $firebase } = useNuxtApp()
+  const databaseRef = dbRef($firebase.database, 'myData')
   onValue(databaseRef, (snapshot) => {
     const data = snapshot.val()
     if (data) {
