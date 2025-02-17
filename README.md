@@ -1,5 +1,5 @@
 # EPWS24-25_ZellmannRunde ShrinkIT
-Entwicklungprojekt mit Schwerpunkt Web Development von Hendrik Runde und Alexander Zellmann
+Entwicklungprojekt mit Schwerpunkt Web Development von **Hendrik Runde** und **Alexander Zellmann**
 
 # Projektkontext
 Im Rahmen des Entwicklungsprojekts mit dem Schwerpunkt Web Development entwickeln wir eine Webapplikation, die es ermöglicht zu große Mediendateien zu verkleinern bzw. zu komprimieren bevor diese in ein CMS hochgeladen werden.
@@ -24,5 +24,5 @@ Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audios
 
 
 # Unsere Lösung
-Alle Schritte bis hin zur fertigen Anwendung sind im [Wiki](https://github.com/HendrikRunde/EPWS24-25_ZellmannRunde/wiki) hinterlegt. Unsere [Weekly Documentation](https://github.com/HendrikRunde/EPWS24-25_ZellmannRunde/wiki/Weekly-Documentation) hat dabei Woche für Woche unseren aktuellen Stand aufgezeigt.
+Alle Schritte bis hin zur fertigen Anwendung **"ShrinkIT"** sind im [Wiki](https://github.com/HendrikRunde/EPWS24-25_ZellmannRunde/wiki) hinterlegt. Unsere [Weekly Documentation](https://github.com/HendrikRunde/EPWS24-25_ZellmannRunde/wiki/Weekly-Documentation) hat dabei Woche für Woche unseren aktuellen Stand aufgezeigt.
 
