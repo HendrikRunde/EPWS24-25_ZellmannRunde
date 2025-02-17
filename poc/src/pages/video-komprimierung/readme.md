@@ -1,4 +1,4 @@
-**Prüfen, ob das Framework "fluent-ffmpeg" die Option einer Qualitätsanpassung bei der Verkleinerung anbietet**
+**1. Prüfen, ob das Framework "fluent-ffmpeg" die Option einer Qualitätsanpassung bei der Verkleinerung anbietet**
 
 **Exit-Kriterien:**
 
