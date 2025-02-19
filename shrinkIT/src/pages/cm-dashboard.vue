@@ -32,12 +32,6 @@
               <span class="d-sm-inline d-none">Abmelden</span>
             </NuxtLink>
           </li>
-
-          <!-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-bell cursor-pointer"></i>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>

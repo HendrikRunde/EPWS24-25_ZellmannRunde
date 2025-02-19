@@ -38,7 +38,7 @@
                       <span class="text-sm opacity-8">Speicherplatz</span>
                     </div>
                     <div class="d-grid text-center">
-                      <span class="text-lg font-weight-bolder">{{ myData?.used }} MB</span>
+                      <span class="text-lg font-weight-bolder">{{ usedVolume }} MB</span>
                       <span class="text-sm opacity-8">Bereits verwendet</span>
                     </div>
 
@@ -62,11 +62,12 @@
             <div class="card-header pb-0">
             </div>
             <div class="card-body" v-if="myData?.expired">
-              <p class="text-uppercase text-danger text-lg font-weight-bold">Ihr Zugriff ist abgelaufen</p>
+              <p class="text-uppercase text-danger text-lg font-weight-bold">Ihr Zugriff ist abgelaufen!</p>
             </div>
             <div class="card-body" v-if="!myData?.expired">
               <p class="text-uppercase text-lg font-weight-bold"> Verbleibendes Guthaben: {{ credit }} MB</p>
-              <p class="text-uppercase text-sm font-weight-bold" v-if="credit == 0"> Ihr Guthaben ist aufgebraucht</p>
+              <p class="text-uppercase text-lg font-weight-bold text-danger" v-if="credit == 0"> Ihr Guthaben ist
+                aufgebraucht!</p>
 
               <div class="row">
 
@@ -77,7 +78,7 @@
                   </div>
 
                   <!-- Dropzone for file uploads -->
-                  <div v-if="credit > 0" id="my-dropzone" class="dropzone" v-show="!compressing"></div>
+                  <div id="my-dropzone" class="dropzone" v-show="!compressing && credit !=0"></div>
                   <div v-if="uploading" class="uploading">
                     <p>Hochladen: {{ currentFileName }}...</p>
                   </div>
@@ -130,7 +131,7 @@
                                 <td>
                                   <div class="d-flex px-2">
                                     <div class="my-auto">
-                                      <h6 class="mb-0 text-sm">{{ file.name }}</h6>
+                                      <h6 class="mb-0 text-sm" :title="file.name">{{ file.name }}</h6>
                                     </div>
                                   </div>
                                 </td>
@@ -178,21 +179,21 @@
                   <!-- Bereits komprimierte Mediendateien des Benutzers -->
                   <div class="card mb-4" style="margin-top: 30px;">
                     <div class="card-body px-0 pt-0 pb-2">
-                      <div class="table-responsive p-5">
-                        <p class="text-uppercase text-lg font-weight-bold"> Ihre komprimierte Mediendateien</p>
+                      <div class="table-responsive p-5" style="overflow-x: hidden;"> 
+                        <p class="text-uppercase text-lg font-weight-bold"> Ihre komprimierten Mediendateien</p>
 
                         <table class="table align-items-center justify-content-center mb-0">
                           <thead>
-                            <tr>
+                            <tr v-show="compressedFiles.length > 0">
                               <th class="text-secondary text-s font-weight-bolder opacity-7">
                                 Dateiname</th>
-                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2">
-                                Originalgröße (MB)</th>
-                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2">
+                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2 d-none d-md-table-cell" style="text-wrap: initial;">
+                                Original-Größe (MB)</th>
+                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2 d-none d-md-table-cell" style="text-wrap: initial;">
                                 Komprimierte Größe (MB)</th>
-                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2">
-                                Kompressionsrate (%)</th>
-                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2">
+                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2 d-none d-md-table-cell" style="text-wrap: initial;">
+                                Komprimierungs-rate (%)</th>
+                              <th class="text-secondary text-s font-weight-bolder opacity-7 ps-2 d-none d-md-table-cell">
                                 Datum</th>
                               <th></th>
                               <th></th>
@@ -203,20 +204,22 @@
                               <td>
                                 <div class="d-flex px-2">
                                   <div class="my-auto">
-                                    <h6 class="mb-0 text-sm">{{ file.filename }}</h6>
+                                    <h6 class="mb-0 text-sm" :title="file.filename">{{ file.filename.length > 40 ? file.filename.substring(0, 40) + '...' : file.filename }}</h6>
                                   </div>
                                 </div>
                               </td>
-                              <td>
-                                <p class="text-sm font-weight-bold mb-0"> {{ (file.originalSize / (1024 * 1024)).toFixed(2) }} MB</p>
+                              <td class="d-none d-md-table-cell">
+                                <p class="text-sm font-weight-bold mb-0"> {{ (file.originalSize / (1024 *
+                                  1024)).toFixed(2) }} MB</p>
                               </td>
-                              <td>
-                                <p class="text-sm font-weight-bold mb-0"> {{ (file.compressedSize / (1024 * 1024)).toFixed(2) }} MB</p>
+                              <td class="d-none d-md-table-cell">
+                                <p class="text-sm font-weight-bold mb-0"> {{ (file.compressedSize / (1024 *
+                                  1024)).toFixed(2) }} MB</p>
                               </td>
-                              <td>
+                              <td class="d-none d-md-table-cell">
                                 <p class="text-sm font-weight-bold mb-0"> {{ file.compressionRatio.toFixed(2) }} %</p>
                               </td>
-                              <td>
+                              <td class="d-none d-md-table-cell">
                                 <p class="text-sm font-weight-bold mb-0"> {{ formatDate(file.dateCreated) }}</p>
                               </td>
                               <td class="align-middle">
@@ -226,7 +229,8 @@
                                 </a>
                               </td>
                               <td class="align-middle">
-                                <button @click="copyToClipboard(file.directLink)" class="btn btn-sm btn-outline-success" title="In die Zwischenablage kopieren">
+                                <button @click="copyToClipboard(file.directLink)" class="btn btn-sm btn-outline-success"
+                                  title="In die Zwischenablage kopieren">
                                   <i class="fa-solid fa-copy"></i>
                                 </button>
                               </td>
@@ -271,21 +275,19 @@
       </footer>
     </div>
   </div>
+  <div v-if="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
 </template>
 
 
 <script setup>
 
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref as dbRef, push } from 'firebase/database';
-import { getAuth } from 'firebase/auth';
 import PopupDialog from '~/components/PopupDialog.vue'
-
-// Initialize Firebase
 
 const router = useRouter()
 const route = useRoute()
@@ -311,13 +313,19 @@ const insufficientCreditMessage = ref('')
 const compressedFiles = ref([])
 const abortController = ref(null)
 const showLinkPopup = ref(false)
-const copiedLink = ref('')
 const copiedLinkMessage = ref('')
+const errorMessage = ref('')
 
-const credit = await computed(() => {
+const credit = computed(() => {
   console.log('myData', myData.value, myData.value.volume - myData.value.used)
-  return (myData.value.volume - myData.value.used).toFixed(2)
+  const remainingCredit = (myData.value.volume - myData.value.used).toFixed(2)
+  return remainingCredit > 0.5 ? remainingCredit : 0
 })
+
+const usedVolume = computed(() => {
+  return credit.value == 0 ? myData.value.volume : myData.value.used
+})
+
 
 const canCompress = computed(() => {
   const totalFileSize = uploadedFiles.value.reduce((acc, file) => acc + parseFloat(file.size), 0)
@@ -328,56 +336,79 @@ const dropzoneOptions = {
   url: '/api/upload',
   maxFilesize: 200, // Maximal zulässige Dateigröße in MB
   dictDefaultMessage: "Dateien zum Hochladen hier ablegen",
+  
   dictRemoveFile: "Datei entfernen",
+  dictInvalidFileType: "Sie können Dateien dieses Typs nicht hochladen.",
   addRemoveLinks: true,
+  acceptedFiles: 'audio/mp3,video/mp4,image/jpeg,image/jpg,image/png,image/gif',
+  init: function() {
+    this.on("error", function(file, message) {
+      if (message === "Sie können Dateien dieses Typs nicht hochladen.") {
+        errorMessage.value = message;
+        this.removeFile(file);
+      }
+    });
+  }
 }
 
 let dropzoneInstance
 
 onMounted(async () => {
-  dropzoneInstance = new Dropzone('#my-dropzone', dropzoneOptions)
+  try {
+    dropzoneInstance = new Dropzone('#my-dropzone', dropzoneOptions)
 
-  dropzoneInstance.on('addedfile', (file) => {
-    uploading.value = true
-    currentFileName.value = file.name
-  })
-
-  function bytesToMB(bytes) { return (bytes / (1024 * 1024)).toFixed(2); }
-
-  dropzoneInstance.on('success', (file, response) => {
-    uploading.value = false
-    const fileSizeMB = bytesToMB(file.size) // Konvertiert Byte in aufgerundete MB
-    uploadedFiles.value.push({
-      name: file.name,
-      size: fileSizeMB,
-      dropzoneFile: file,
-      status: 'Hochgeladen',
-      response
+    dropzoneInstance.on('addedfile', (file) => {
+      uploading.value = true
+      currentFileName.value = file.name
     })
-    updateCredit()
-  })
 
-  dropzoneInstance.on('error', (file, errorMessage) => {
-    uploading.value = false
-    console.error('Fehler beim Hochladen:', errorMessage)
-  })
+    function bytesToMB(bytes) { return (bytes / (1024 * 1024)).toFixed(2); }
 
-  dropzoneInstance.on('complete', () => {
-    uploading.value = false
-  })
+    dropzoneInstance.on('success', (file, response) => {
+      uploading.value = false
+      const fileSizeMB = bytesToMB(file.size) // Konvertiert Byte in aufgerundete MB
+      uploadedFiles.value.push({
+        name: file.name,
+        size: fileSizeMB,
+        dropzoneFile: file,
+        status: 'Hochgeladen',
+        response
+      })
+      updateCredit()
+    })
 
-  dropzoneInstance.on('removedfile', (file) => {
-    uploadedFiles.value = uploadedFiles.value.filter(f => f.dropzoneFile !== file)
-    updateCredit()
-  })
+    dropzoneInstance.on('error', (file, errorMessage) => {
+      uploading.value = false
+      console.error('Fehler beim Hochladen:', errorMessage)
+    })
 
-  // Fetch compressed files
-  const { data: compressedData, error: compressedError } = await useFetch(`/api/get-compressed-files?userId=${myData.value.id}`)
-  if (compressedData.value && compressedData.value.success) {
-    compressedFiles.value = Object.values(compressedData.value.files)
-  } else {
-    console.error('Error fetching compressed files:', compressedError.value)
+    dropzoneInstance.on('complete', () => {
+      uploading.value = false
+    })
+
+    dropzoneInstance.on('removedfile', (file) => {
+      uploadedFiles.value = uploadedFiles.value.filter(f => f.dropzoneFile !== file)
+      updateCredit()
+    })
+
+    // Fetch compressed files
+    const { data: compressedData, error: compressedError } = await useFetch(`/api/get-compressed-files?userId=${myData.value.id}`)
+    if (compressedData.value && compressedData.value.success) {
+      compressedFiles.value = Object.values(compressedData.value.files)
+    } else {
+      console.error('Error fetching compressed files:', compressedError.value)
+    }
+  } catch (error) {
+    console.error('Error initializing Dropzone:', error)
   }
+})
+
+// Watcher for credit changes
+watch(credit, (newCredit, oldCredit) => {
+  console.log(`Credit changed from ${oldCredit} to ${newCredit}`)
+  if (newCredit == 0)
+    myData.value.used = myData.value.volume
+  //updateCredit()
 })
 
 // Determine the file type based on the file extension
@@ -501,7 +532,7 @@ async function compressFiles() {
           // Download the compressed file
           const downloadLink = document.createElement('a');
           const downloadPath = successResult.outputPath.replace(/^public\\assets\\uploads\\/, '').replace(/\\/g, '/');
-         // console.log('Download Path:', downloadPath);
+          // console.log('Download Path:', downloadPath);
           downloadLink.href = `/assets/uploads/${downloadPath}`;
           downloadLink.download = file.name;
           document.body.appendChild(downloadLink);
@@ -624,6 +655,10 @@ function formatDate(dateString) {
 .dropzone {
   border: 2px dashed #007BFF;
   padding: 20px;
+}
+
+.dropzone * {
+  font-size: larger;
 }
 
 .uploading {

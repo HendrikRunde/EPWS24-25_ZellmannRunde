@@ -1,4 +1,3 @@
-// filepath: /C:/DevProjects/test/nuxt/shrinkIT/server/api/upload-profile-picture.ts
 import { defineEventHandler, readMultipartFormData } from "h3";
 import { promises as fs } from "fs";
 import { join } from "path";
