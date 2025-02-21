@@ -26,3 +26,6 @@ Kunden sind die Benutzer, die regelmäßig Medieninhalte (Bilder, Videos, Audios
 # Unsere Lösung
 Alle Schritte bis hin zur fertigen Anwendung **"ShrinkIT"** sind im [Wiki](https://github.com/HendrikRunde/EPWS24-25_ZellmannRunde/wiki) hinterlegt. Unsere [Weekly Documentation](https://github.com/HendrikRunde/EPWS24-25_ZellmannRunde/wiki/Weekly-Documentation) hat dabei Woche für Woche unseren aktuellen Stand aufgezeigt.
 
+# Projektposter
+[ShrinkIT Projektposter.pdf](https://github.com/user-attachments/files/18901686/ShrinkIT.Projektposter.pdf)
+
