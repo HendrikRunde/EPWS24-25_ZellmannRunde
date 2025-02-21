@@ -1,0 +1,3 @@
+Dieser Prototyp demonstriert die Kernfunktionen der ShrinkIT-Anwendung. Er ermöglicht die Generierung personalisierter Links und die Komprimierung von Mediendateien (Bilder und Videos) basierend auf definierten Parametern. 
+Über die generierten Links können Nutzer Mediendateien hochladen, die dann automatisch gemäß den festgelegten Komprimierungseinstellungen optimiert werden. Dieser Prototyp ist auf lokale Tests ausgerichtet. Er wurde entwickelt,
+um die Komprimierungslogik und Link-Generierung zu veranschaulichen und zu testen.
