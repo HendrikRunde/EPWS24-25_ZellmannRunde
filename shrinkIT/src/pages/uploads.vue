@@ -86,7 +86,7 @@
 
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <button @click="compressFiles" :disabled="!canCompress" class="btn btn-sm btn-primary">Auswahl
+                        <button @click="compressFiles" :disabled="!canCompress" class="btn btn-sm btn-primary" v-show="!compressing && !showPopup">Auswahl
                           komprimieren</button>
                       </div>
 
@@ -167,7 +167,7 @@
 
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <button @click="compressFiles" :disabled="!canCompress" class="btn btn-sm btn-primary">Auswahl
+                        <button @click="compressFiles" :disabled="!canCompress" class="btn btn-sm btn-primary" v-show="!compressing && !showPopup">Auswahl
                           komprimieren</button>
 
                       </div>
@@ -340,7 +340,7 @@ const dropzoneOptions = {
   dictRemoveFile: "Datei entfernen",
   dictInvalidFileType: "Sie können Dateien dieses Typs nicht hochladen.",
   addRemoveLinks: true,
-  acceptedFiles: 'audio/mp3,video/mp4,image/jpeg,image/jpg,image/png,image/gif',
+  //acceptedFiles: 'audio/mp3,video/mp4,image/jpeg,image/jpg,image/png,image/gif',
   init: function() {
     this.on("error", function(file, message) {
       if (message === "Sie können Dateien dieses Typs nicht hochladen.") {

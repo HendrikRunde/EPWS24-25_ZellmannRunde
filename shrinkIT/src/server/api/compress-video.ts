@@ -78,7 +78,7 @@ export default defineEventHandler(async (event) => {
       try {
         const videoQuality = Number(fields.videoQuality) || 50;
         let crfValue;
-
+        //Videoqualität in CRF umwandeln (Constant Rate Factor, 0-51)
         if (videoQuality >= 90) {
           crfValue = 23;
         } else if (videoQuality >= 80) {
@@ -88,7 +88,7 @@ export default defineEventHandler(async (event) => {
         } else if (videoQuality >= 60) {
           crfValue = 40;
         } else {
-          crfValue = Math.round(((100 - videoQuality) * 51) / 100); // Default conversion for other values
+          crfValue = Math.round(((100 - videoQuality) * 51) / 100); 
         }
 
         console.log("Compressing video... crfValue:", crfValue);
@@ -97,8 +97,8 @@ export default defineEventHandler(async (event) => {
           .outputOptions([
             "-c:v libx264",
             `-crf ${crfValue}`,
-            "-preset veryslow", // Use a slower preset for better compression
-            "-movflags +faststart", // Optimize for web streaming
+            "-preset slow", // Langsamer Modus für bessere Komprimierung verwenden
+            "-movflags +faststart", 
           ])
           .save(outputPath)
           .on("end", () => {

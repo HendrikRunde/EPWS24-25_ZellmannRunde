@@ -19,20 +19,20 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <input type="text" id="firstname" class="form-control" placeholder="Vorname *" aria-label="Vorname" v-model="firstname"
+                    <input type="text" id="firstname" class="form-control" placeholder="Vorname *" aria-label="Vorname" v-model="firstname" autocomplete="new-firstname1" 
                       required>
                   </div>
                   <div class="mb-3">
-                    <input type="text" id="lastname" class="form-control" placeholder="Nachname *" aria-label="Nachname" v-model="lastname"
+                    <input type="text" id="lastname" class="form-control" placeholder="Nachname *" aria-label="Nachname" v-model="lastname" autocomplete="new-lastname1"
                       required>
                   </div>
                   <div class="mb-3">
-                    <input type="email" id="email" class="form-control" placeholder="Email *" aria-label="Email" v-model="email" @input="validateEmail" autocomplete="off" required>
+                    <input type="email" id="email" class="form-control" placeholder="Email *" aria-label="Email" v-model="email" @input="validateEmail" autocomplete="new-email1" required>
                     <p v-if="emailError" class="text-danger">{{ emailError }}</p>
                   </div>
 
                   <div class="mb-3">
-                    <input type="text" id="profession" class="form-control" placeholder="Beruf" aria-label="Beruf" v-model="profession">
+                    <input type="text" id="profession" class="form-control" placeholder="Beruf" aria-label="Beruf" v-model="profession" autocomplete="new-lastname">
                   </div>
 
                 </div>

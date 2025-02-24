@@ -85,8 +85,9 @@ export default defineEventHandler(async (event) => {
 
         try {
           const audioQuality = Number(fields.audioQuality) || 128;
-          const bitrate = Math.round((audioQuality / 100) * 320); // Convert quality percentage to bitrate (max 320 kbps)
+          const bitrate = Math.round((audioQuality / 100) * 320); // Konvertierung von Qualität in % zu Bitrate (max 320 kbps)
 
+          //Komprimierung von Audiodateien mit ffpeg
           await new Promise<void>((res, rej) => {
             ffmpeg(audioPath)
               .outputOptions(["-c:a libmp3lame", `-b:a ${bitrate}k`])
