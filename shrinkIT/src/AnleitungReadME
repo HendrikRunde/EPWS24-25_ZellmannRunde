@@ -1,0 +1,13 @@
+Schritte bis zum Ausführen:
+1. npm install
+2. npm run dev
+
+Anleitung Anwendung:
+
+1. localhost aufrufen
+2. Bei Content Mangaer Dashboard anmelden: Login: cm@shrinkit.com  Pass:demo
+3. Link der Webseite hinter dem letzten / in -> signup  ändern
+4. Nutzer Konto erstellen
+5. Über Adim Dashboard Link generieren
+6. Link über Email aufrufen
+7. Dateien Komprimieren
