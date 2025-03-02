@@ -1,0 +1,13 @@
+Schritte bis zum Ausführen:
+1. npm install
+2. npm run dev
+
+Anleitung Anwendung:
+
+1. localhost aufrufen
+2. Im Content Manager Dashboard anmelden: Email: cm@shrinkit.com  Passwort:demo
+3. Link der Webseite hinter dem letzten / in -> signup  ändern
+4. Nutzerkonto erstellen
+5. Über Content Manager Dashboard personalisierten Link generieren
+6. Link über Email aufrufen
+7. Dateien komprimieren
