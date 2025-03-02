@@ -77,7 +77,7 @@
                     Zuletzt {{ totalFilesCompressedToday }} Dateien ({{ totalSizeCompressedToday }} MB) komprimiert
                   </div>
 
-                  <!-- Dropzone for file uploads -->
+                  <!-- Dropzone für Uploads -->
                   <div id="my-dropzone" class="dropzone" v-show="!compressing && credit !=0"></div>
                   <div v-if="uploading" class="uploading">
                     <p>Hochladen: {{ currentFileName }}...</p>
